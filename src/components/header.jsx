@@ -26,7 +26,7 @@ export default function Header(){
           color="gray.100"
           textTransform="uppercase"
         >
-          {/* For Developers */}
+          For Developers
         </chakra.p>
         <chakra.h1
           mb={3}
@@ -35,10 +35,10 @@ export default function Header(){
           lineHeight="shorter"
           color="white"
         >
-          Lorem ipsum dolor sit amet.
+          Focus on your apps
         </chakra.h1>
         <chakra.p mb={5} color="gray.50" fontSize={{ md: "lg" }}>
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor sunt sequi libero neque iste excepturi earum optio, voluptatum, commodi amet temporibus blanditiis asperiores expedita.
+          Today every company needs apps to engage their customers and run their businesses. Step up your ability to build, manage, and deploy great apps at scale with us.
         </chakra.p>
         <HStack>
             <Button 
@@ -46,8 +46,9 @@ export default function Header(){
                 bg="green.500" 
                 color="white"
                 px="12"
-                size="lg"
+                size="md"
                 variant="none"
+                fontSize={"lg"}
             >
                 <Link to="/signin">Sign in</Link>
             </Button>

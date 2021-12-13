@@ -6,7 +6,6 @@ import {
     Flex,
     Button,
     useColorModeValue,
-    Text,
     HStack,
     useDisclosure,
     VStack,
@@ -51,15 +50,16 @@ export default function Navbar() {
                             <Link to="/login">Login</Link>
                         </chakra.a>
                         
-                        <Button 
+                        <chakra.a 
                             colorScheme='blue'
                             bg="green.500" 
                             color="white"
                             px="6"
                             variant="none"
+                            fontWeight="light"
                         >
                             <Link to="/signin">Sign in</Link>
-                        </Button>
+                        </chakra.a>
                         
                     </HStack>
                     {/* navbar in small screens */}
@@ -69,8 +69,8 @@ export default function Navbar() {
                             display={{ base: "flex", md: "none" }}
                             aria-label="Open menu"
                             fontSize="20px"
-                            color={useColorModeValue("gray.800", "inherit")}
-                            variant="ghost"
+                            color={useColorModeValue("gray.50", "inherit")}
+                            variant="none"
                             icon={<AiOutlineMenu />}
                             onClick={mobileNav.onOpen}
                         />
