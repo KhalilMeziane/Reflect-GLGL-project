@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import { Navbar } from '../components/_index'
+import { Navbar, Header } from '../components/_index'
+import { Box } from '@chakra-ui/react'
+import headerImage from '../assets/images/header2.jpg'
 
 export default function Home() {
     return (
@@ -9,9 +11,24 @@ export default function Home() {
             <Helmet>
                 <title>Reflect</title>
             </Helmet>
-            <Navbar/>
-            <h1>this is home page</h1>
-            <Link to="/login">login</Link>
+            <Box 
+                bgImage={`url(${headerImage})`}
+                // bgPosition="center"
+                bgRepeat="no-repeat"
+                bgSize="cover"
+                h="100vh"
+                position={"relative"}
+            >
+                <Box
+                    position={"absolute"}
+                    w="full"
+                    h="full"
+                    bg="black"
+                    opacity={"60%"}
+                ></Box>
+                <Navbar/>
+                <Header/>
+            </Box>
         </>
     )
 }
