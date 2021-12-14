@@ -78,7 +78,7 @@ export default function Login() {
                                 color="gray.700" 
                                 textTransform="capitalize" 
                             >
-                                dont have account? 
+                                don't have account? 
                                 <Link to="/signup">
                                     <Text display="inline" px="2" fontWeight="semibold" color="green.500">Create</Text>
                                 </Link>

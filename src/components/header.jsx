@@ -54,7 +54,7 @@ const Header = () => {
             rounded="md"
             bg="green.600"
           >
-           <Link to="/signin">Get Started</Link>
+           <Link to="/signup">Get Started</Link>
             <Icon boxSize={4} ml={1} viewBox="0 0 20 20" fill="currentColor">
               <path
                 fillRule="evenodd"
