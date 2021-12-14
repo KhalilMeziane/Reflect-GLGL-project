@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from "react-helmet"
 import { Link } from 'react-router-dom'
-import LoginImage from '../assets/images/WebsiteLogin.svg'
+import WebsiteSignIn from '../assets/images/WebsiteSignIn.svg'
 import {
   Box,
   GridItem,
@@ -17,7 +17,7 @@ export default function Login() {
     return (
         <>
             <Helmet>
-                <title>Login | Reflect</title>
+                <title>Signup | Reflect</title>
             </Helmet>
             <Box px={8} mx="auto">
                 <SimpleGrid
@@ -32,16 +32,29 @@ export default function Login() {
                         colSpan={{ base: 0, lg: 6 }}
                         display={{base:"none", lg:"block"}}
                     >
-                        <Image src={LoginImage} alt='login image' />
+                        <Image src={WebsiteSignIn} alt='login image' />
                     </GridItem>
                     <GridItem colSpan={{ base: "auto", md: 6 }}>
                         <Box as="form" mb={6}>
-                            <Text fontSize="3xl" fontWeight="semibold" textTransform="capitalize" pt={2}>login</Text>
+                            <Text fontSize="3xl" fontWeight="semibold" textTransform="capitalize" pt={2}>create account</Text>
                             <SimpleGrid
                                 columns={1}
                                 py={2}
                                 spacing={4}
                             >
+                                 <Stack>
+                                    <Text mb='3px' textTransform="capitalize">full name</Text>
+                                    <Input
+                                        type="text"
+                                        placeholder="john snow"
+                                        required="true"
+                                        color="gray.900"
+                                        borderColor="gray.300"
+                                        border="2px"
+                                        borderStyle="solid"
+                                        size="lg"
+                                    />
+                                </Stack>
                                 <Stack>
                                     <Text mb='3px'>Email Address</Text>
                                     <Input
@@ -69,7 +82,7 @@ export default function Login() {
                                     />
                                 </Stack>
                                 <Button bg="green.500" fontSize="lg" variant="none" color="white" w="full" py={3.5} type="submit">
-                                    login
+                                    Sign up for free
                                 </Button>
                             </SimpleGrid>
                             <Text 
@@ -78,9 +91,9 @@ export default function Login() {
                                 color="gray.700" 
                                 textTransform="capitalize" 
                             >
-                                dont have account? 
-                                <Link to="/signup">
-                                    <Text display="inline" px="2" fontWeight="semibold" color="green.500">Create</Text>
+                                already have account? 
+                                <Link to="/login">
+                                    <Text display="inline" px="2" fontWeight="semibold" color="green.500">Login</Text>
                                 </Link>
                             </Text>
                         </Box>

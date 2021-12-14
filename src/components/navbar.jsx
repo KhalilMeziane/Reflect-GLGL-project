@@ -58,7 +58,7 @@ export default function Navbar() {
                             variant="none"
                             fontWeight="light"
                         >
-                            <Link to="/signin">Sign in</Link>
+                            <Link to="/signup">SignUp</Link>
                         </chakra.a>
                         
                     </HStack>
