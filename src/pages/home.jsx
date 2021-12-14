@@ -13,7 +13,6 @@ export default function Home() {
             </Helmet>
             <Box 
                 bgImage={`url(${headerImage})`}
-                // bgPosition="center"
                 bgRepeat="no-repeat"
                 bgSize="cover"
                 h="100vh"

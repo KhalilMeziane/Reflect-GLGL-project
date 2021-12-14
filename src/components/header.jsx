@@ -1,59 +1,72 @@
-import React from "react"
-import { Link } from "react-router-dom"
-
+import React from "react";
+import { Link } from 'react-router-dom';
 import {
   chakra,
   Box,
-  Flex,
-  Button,
-  HStack,
-} from "@chakra-ui/react"
+  Stack,
+  Icon,
+} from "@chakra-ui/react";
 
-export default function Header(){
+const Header = () => {
   return (
-    <Flex px={4} py={32} mx="auto"  position={"relative"}>
-      <Box 
-        // mx="auto" 
-        // w="full"
-        px={{ base: 4, sm: 6, md: 8, xl: 20 }}
-        w={{base: "full", sm: 10/12, md: 9/12, lg: 8/12}}
+    <Box px={8} py={24} mx="auto">
+      <Box
+        w={{ base: "full", md: 11 / 12, xl: 9 / 12 }}
+        mx="auto"
+        textAlign={{ base: "left", md: "center" }}
+        position="relative"
       >
-        <chakra.p
-          mb={2}
-          fontSize="xs"
-          fontWeight="semibold"
-          letterSpacing="wide"
-          color="gray.100"
-          textTransform="uppercase"
-        >
-          For Developers
-        </chakra.p>
         <chakra.h1
-          mb={3}
-          fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
-          fontWeight="semibold"
-          lineHeight="shorter"
+          mb={6}
+          fontSize={{ base: "4xl", md: "6xl" }}
+          fontWeight="bold"
+          lineHeight="none"
+          letterSpacing={{ base: "normal", md: "tight" }}
           color="white"
         >
-          Focus on your apps
+           Focus on your apps
         </chakra.h1>
-        <chakra.p mb={5} color="gray.50" fontSize={{ md: "lg" }}>
+        <chakra.p
+          px={{ base: 0, lg: 24 }}
+          mb={6}
+          fontSize={{ base: "lg", md: "xl" }}
+          color="gray.50"
+        >
           Today every company needs apps to engage their customers and run their businesses. Step up your ability to build, manage, and deploy great apps at scale with us.
         </chakra.p>
-        <HStack>
-            <Button 
-                colorScheme='blue'
-                bg="green.500" 
-                color="white"
-                px="12"
-                size="md"
-                variant="none"
-                fontSize={"lg"}
-            >
-                <Link to="/signin">Sign in</Link>
-            </Button>
-        </HStack>
+        <Stack
+        direction={{base:"column",sm:"row"}}
+          mb={{ base: 4, md: 8 }}
+          spacing={2}
+          justifyContent={{ sm: "left", md: "center" }}
+        >
+          <chakra.a
+            display="inline-flex"
+            alignItems="center"
+            justifyContent="center"
+            w={{ base: "full", sm: "auto" }}
+            mb={{ base: 2, sm: 0 }}
+            px="8"
+            py="2"
+            color="white"
+            fontSize="xl"
+            cursor="pointer"
+            rounded="md"
+            bg="green.600"
+          >
+           <Link to="/signin">Get Started</Link>
+            <Icon boxSize={4} ml={1} viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fillRule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </Icon>
+          </chakra.a>
+        </Stack>
       </Box>
-    </Flex>
+    </Box>
   );
 };
+
+export default Header;

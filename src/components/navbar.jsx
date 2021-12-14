@@ -4,7 +4,6 @@ import {
     chakra,
     Box,
     Flex,
-    Button,
     useColorModeValue,
     HStack,
     useDisclosure,
@@ -31,7 +30,7 @@ export default function Navbar() {
             <Flex alignItems="center" justifyContent="space-between" mx="auto">
                 {/* logo brand */}
                 <Flex>
-                    <chakra.h1 fontSize="2xl" color="white" fontWeight="medium" ml="4">
+                    <chakra.h1 fontSize="2xl" color="white" fontWeight="medium" ml="4" cursor="pointer">
                         Reflect
                     </chakra.h1>
                 </Flex>
@@ -46,7 +45,6 @@ export default function Navbar() {
                         <chakra.a
                             color="white"
                         >
-                            {/* <Logo /> */}
                             <Link to="/login">Login</Link>
                         </chakra.a>
                         
@@ -55,6 +53,8 @@ export default function Navbar() {
                             bg="green.500" 
                             color="white"
                             px="6"
+                            py="1.5"
+                            rounded="sm"
                             variant="none"
                             fontWeight="light"
                         >
