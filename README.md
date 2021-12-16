@@ -10,7 +10,7 @@ Build mini microsoft project clone using react j & chakra ui
 ├─ `routes` \
 ├─ `helpers` \
 ├─ `app.js` \
-├ `index.js` \
+└─`index.js` 
 ## Usage 
 These instructions will get you a copy of the project up and running on your local machine
 
@@ -32,10 +32,6 @@ Install the dependencies:
 ```bash
 # Install with NPM
 $ npm install
-```
-Specify your target port:
-``` bash
-
 ```
 Lastly launch the Project:
 ```bash
