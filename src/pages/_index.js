@@ -4,6 +4,7 @@ import SignUp from './signup'
 import NotFound from './notFound'
 import Profile from './profile'
 import Dashboard from './dashboard'
+import Project from './project'
 
 export {
     Home,
@@ -11,5 +12,6 @@ export {
     NotFound,
     SignUp,
     Profile,
-    Dashboard
+    Dashboard,
+    Project
 }

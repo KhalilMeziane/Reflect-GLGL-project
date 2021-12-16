@@ -24,7 +24,6 @@ export default function projectsTable() {
   return (
     <Flex
       w="full"
-      bg="gray.50"
       px={{ base: 4, sm: 6, md: 8, xl: 28 }}
       py="8"
       alignItems="center"

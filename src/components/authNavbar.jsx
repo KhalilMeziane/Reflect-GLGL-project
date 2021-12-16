@@ -22,7 +22,7 @@ export default function Dsll() {
       <chakra.header
         w="full"
         py={4}
-        shadow="xs"
+        shadow="sm"
         px={{ base: 4, sm: 6, md: 8, xl: 28 }}
       >
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
