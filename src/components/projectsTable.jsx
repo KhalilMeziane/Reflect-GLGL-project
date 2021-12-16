@@ -10,17 +10,18 @@ import {
   Td,
   Tbody,
 } from '@chakra-ui/react'
-import { AiFillEdit } from 'react-icons/ai'
-import { BsBoxArrowUpRight, BsFillTrashFill } from 'react-icons/bs'
+import { BsBoxArrowUpRight } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
+import { DeleteProject } from '../components/modals/_index'
 
 export default function projectsTable() {
-  const header = ['project', 'created', 'actions'];
+  const header = ['project', 'created', 'actions']
   const data = [
     { name: 'Daggy', created: '7 days ago' },
     { name: 'Anubra', created: '23 hours ago' },
     { name: 'Josef', created: 'A few seconds ago' },
     { name: 'Sage', created: 'A few hours ago' },
-  ];
+  ]
   return (
     <Flex
       w="full"
@@ -132,16 +133,13 @@ export default function projectsTable() {
                 </Td>
                 <Td>
                   <ButtonGroup variant="solid" size="sm" spacing={3}>
-                    <IconButton
-                      colorScheme="blue"
-                      icon={<BsBoxArrowUpRight />}
-                    />
-                    <IconButton colorScheme="green" icon={<AiFillEdit />} />
-                    <IconButton
-                      colorScheme="red"
-                      variant="outline"
-                      icon={<BsFillTrashFill />}
-                    />
+                    <Link to="/dashboard/5">
+                      <IconButton
+                        colorScheme="blue"
+                        icon={<BsBoxArrowUpRight />}
+                      />
+                    </Link>
+                    <DeleteProject/>
                   </ButtonGroup>
                 </Td>
               </Tr>

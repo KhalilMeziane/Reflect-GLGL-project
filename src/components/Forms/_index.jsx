@@ -1,5 +1,5 @@
-import CreateProject from './createProject'
+import CreateProjectForm from './createProject'
 
 export {
-    CreateProject
+    CreateProjectForm
 }

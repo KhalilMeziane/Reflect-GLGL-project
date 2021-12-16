@@ -11,7 +11,7 @@ import {
   } from "@chakra-ui/react"
 import { BsFillTrashFill } from 'react-icons/bs'
 
-export default function CreateProject() {
+export default function CreateProjectModal() {
     return (
         <Box as="form">
             <SimpleGrid
@@ -68,7 +68,6 @@ export default function CreateProject() {
                         size="md"
                     />
                     </HStack>
-                    
                     
                 </Stack>
                 <Stack>
