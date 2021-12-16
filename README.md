@@ -6,9 +6,7 @@ Build mini microsoft project clone using react j & chakra ui
 ├── `images` \
 ├─ `components` \
 ├─ `pages` \
-├─ `config` \
 ├─ `routes` \
-├─ `helpers` \
 ├─ `app.js` \
 └─`index.js` 
 ## Usage 
