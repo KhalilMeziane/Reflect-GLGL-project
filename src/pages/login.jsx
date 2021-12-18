@@ -1,20 +1,10 @@
 import React from 'react'
-import { Helmet } from "react-helmet"
-import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
+import { Box, GridItem, SimpleGrid, Text, Image } from "@chakra-ui/react"
+import { LoginForm } from '../components/Forms/_index'
 import LoginImage from '../assets/images/WebsiteLogin.svg'
-import {
-  Box,
-  GridItem,
-  Button,
-  SimpleGrid,
-  Text,
-  Image,
-} from "@chakra-ui/react"
+import { Link } from 'react-router-dom'
 
-import { Formik, Form } from 'formik'
-import {
-    InputControl
-} from "formik-chakra-ui"
 export default function Login() {
     return (
         <>
@@ -56,38 +46,5 @@ export default function Login() {
                 </SimpleGrid>
             </Box>
         </>
-    )
-}
-
-
-const LoginForm = ()=>{
-    return(
-        <Formik
-            initialValues={{ email: '', password: '' }}
-            onSubmit={(values)=>{
-                console.log("values: ",values)
-            }}
-        >
-            {
-               ()=>(
-                    <Form>
-                        <InputControl 
-                            name="email"
-                            placeholder="exampel@gmail.com"
-                            type="email"
-                            label="Email"
-                            my="4"
-                        />
-                        <InputControl 
-                            name="password"
-                            type="password"
-                            label="Password"
-                            mb="4"
-                        />
-                        <Button type="submit" colorScheme='green' w="full" my="2" fontWeight={"medium"}>Login</Button>
-                   </Form>
-               )
-            }
-        </Formik>
     )
 }

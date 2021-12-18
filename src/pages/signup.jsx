@@ -1,19 +1,9 @@
 import React from 'react'
-import { Helmet } from "react-helmet"
+import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
+import { Box, GridItem, SimpleGrid, Text, Image } from "@chakra-ui/react"
+import { SignupForm } from '../components/Forms/_index'
 import WebsiteSignIn from '../assets/images/WebsiteSignIn.svg'
-import {
-  Box,
-  GridItem,
-  Button,
-  SimpleGrid,
-  Text,
-  Image,
-} from "@chakra-ui/react"
-import { Formik, Form } from 'formik'
-import {
-    InputControl
-} from "formik-chakra-ui"
 
 export default function Login() {
     return (
@@ -39,7 +29,7 @@ export default function Login() {
                     <GridItem colSpan={{ base: "auto", md: 6 }}>
                         <Box mb={6}>
                             <Text fontSize="3xl" fontWeight="semibold" textTransform="capitalize" pt={2}>create account</Text>
-                            <SignUpForm/>
+                            <SignupForm/>
                             <Text 
                                 fontSize="md" 
                                 textAlign="center" 
@@ -56,44 +46,5 @@ export default function Login() {
                 </SimpleGrid>
             </Box>
         </>
-    )
-}
-
-const SignUpForm = ()=>{
-    return(
-        <Formik
-            initialValues={{ name: '', email: '', password: '' }}
-            onSubmit={(values)=>{
-                console.log("values: ",values)
-            }}
-        >
-            {
-               ()=>(
-                    <Form>
-                        <InputControl 
-                            name="name"
-                            placeholder="john snow"
-                            type="text"
-                            label="User Name"
-                            my="4"
-                        />
-                        <InputControl 
-                            name="email"
-                            placeholder="exampel@gmail.com"
-                            type="email"
-                            label="Email"
-                            my="4"
-                        />
-                        <InputControl 
-                            name="password"
-                            type="password"
-                            label="Password"
-                            mb="4"
-                        />
-                        <Button type="submit" colorScheme='green' w="full" my="2" fontWeight={"medium"}>Create Account</Button>
-                   </Form>
-               )
-            }
-        </Formik>
     )
 }
