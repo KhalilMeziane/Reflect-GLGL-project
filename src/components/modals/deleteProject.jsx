@@ -9,7 +9,9 @@ import {
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    IconButton
+    IconButton,
+    Heading,
+    Text
 } from '@chakra-ui/react'
 import { BsFillTrashFill } from 'react-icons/bs'
 
@@ -30,21 +32,22 @@ export default function DeleteProject() {
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Create Project</ModalHeader>
+                    <ModalHeader>Delete Project</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {/* <CreateProject/> */}
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe dignissimos eum mollitia dolorem, iste voluptate, accusantium impedit repellendus veniam quae illo voluptates eveniet sit dolores repudiandae error quis quod id accusamus nihil officia suscipit nisi amet? Rerum necessitatibus, fuga minima optio aliquid doloremque est totam, adipisci harum aut, sunt in.
+                        <Heading textTransform={"capitalize"} fontFamily={"poppins"} size="lg" fontWeight={"medium"} textAlign={"center"} my="2">your about to delete a project</Heading>
+                        <Text textTransform={"capitalize"} textAlign={"center"} fontSize={"lg"}>this will delete your project</Text>
+                        <Text textTransform={"capitalize"} textAlign={"center"} fontSize={"lg"}>are you sure?</Text>
                     </ModalBody>
                     <ModalFooter>
-                        <Button colorScheme='green' mx="3" fontWeight={"medium"}>Create</Button>
+                        <Button colorScheme='red' mx="3" fontWeight={"medium"}>Delete</Button>
                         <Button
                             variant={"none"}
                             onClick={onClose}
                             border="2px"
                             borderStyle={"solid"}
-                            borderColor={"green.300"}
-                            color="green.400"
+                            borderColor={"red.300"}
+                            color="red.400"
                             fontWeight={"medium"}
                         >
                             Close

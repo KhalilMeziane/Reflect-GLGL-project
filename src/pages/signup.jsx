@@ -7,11 +7,13 @@ import {
   GridItem,
   Button,
   SimpleGrid,
-  Input,
   Text,
-  Stack,
   Image,
 } from "@chakra-ui/react"
+import { Formik, Form } from 'formik'
+import {
+    InputControl
+} from "formik-chakra-ui"
 
 export default function Login() {
     return (
@@ -35,56 +37,9 @@ export default function Login() {
                         <Image src={WebsiteSignIn} alt='login image' />
                     </GridItem>
                     <GridItem colSpan={{ base: "auto", md: 6 }}>
-                        <Box as="form" mb={6}>
+                        <Box mb={6}>
                             <Text fontSize="3xl" fontWeight="semibold" textTransform="capitalize" pt={2}>create account</Text>
-                            <SimpleGrid
-                                columns={1}
-                                py={2}
-                                spacing={4}
-                            >
-                                 <Stack>
-                                    <Text mb='3px' textTransform="capitalize">full name</Text>
-                                    <Input
-                                        type="text"
-                                        placeholder="john snow"
-                                        required="true"
-                                        color="gray.900"
-                                        borderColor="gray.300"
-                                        border="2px"
-                                        borderStyle="solid"
-                                        size="lg"
-                                    />
-                                </Stack>
-                                <Stack>
-                                    <Text mb='3px'>Email Address</Text>
-                                    <Input
-                                        type="email"
-                                        placeholder="exampel@gmail.com"
-                                        required="true"
-                                        color="gray.900"
-                                        borderColor="gray.300"
-                                        border="2px"
-                                        borderStyle="solid"
-                                        size="lg"
-                                    />
-                                </Stack>
-                                <Stack>
-                                    <Text mb='3px'>Password</Text>
-                                    <Input
-                                        type="password"
-                                        placeholder="password"
-                                        required="true"
-                                        color="gray.900"
-                                        borderColor="gray.300"
-                                        border="2px"
-                                        borderStyle="solid"
-                                        size="lg"
-                                    />
-                                </Stack>
-                                <Button bg="green.500" fontSize="lg" variant="none" color="white" w="full" py={3.5} type="submit">
-                                    Sign up for free
-                                </Button>
-                            </SimpleGrid>
+                            <SignUpForm/>
                             <Text 
                                 fontSize="md" 
                                 textAlign="center" 
@@ -101,5 +56,44 @@ export default function Login() {
                 </SimpleGrid>
             </Box>
         </>
+    )
+}
+
+const SignUpForm = ()=>{
+    return(
+        <Formik
+            initialValues={{ name: '', email: '', password: '' }}
+            onSubmit={(values)=>{
+                console.log("values: ",values)
+            }}
+        >
+            {
+               ()=>(
+                    <Form>
+                        <InputControl 
+                            name="name"
+                            placeholder="john snow"
+                            type="text"
+                            label="User Name"
+                            my="4"
+                        />
+                        <InputControl 
+                            name="email"
+                            placeholder="exampel@gmail.com"
+                            type="email"
+                            label="Email"
+                            my="4"
+                        />
+                        <InputControl 
+                            name="password"
+                            type="password"
+                            label="Password"
+                            mb="4"
+                        />
+                        <Button type="submit" colorScheme='green' w="full" my="2" fontWeight={"medium"}>Create Account</Button>
+                   </Form>
+               )
+            }
+        </Formik>
     )
 }
