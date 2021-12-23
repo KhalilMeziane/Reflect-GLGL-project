@@ -1,18 +1,9 @@
 import React from 'react'
 import { Helmet } from "react-helmet"
 import { AuthNavbar } from '../components/_index'
-import { 
-    Box,
-    Text, 
-    Divider, 
-    Tabs, 
-    Tab, 
-    TabPanels, 
-    TabPanel, 
-    TabList, 
-    Flex
-} from '@chakra-ui/react'
+import { Box, Text, Divider, Tabs, Tab,  TabPanels, TabPanel, TabList, Flex } from '@chakra-ui/react'
 import { EditProject } from '../components/modals/_index'
+import Test from '../components/Pert/simple'
 
 export default function Project() {
     return (
@@ -34,10 +25,10 @@ export default function Project() {
                     </TabList>
                     <TabPanels>
                         <TabPanel>
-                        <p>this is pert chart!</p>
+                            <Test/>
                         </TabPanel>
                         <TabPanel>
-                        <p>this is gant chart!!</p>
+                            <p>this is gant chart!!</p>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
