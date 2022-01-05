@@ -12,9 +12,6 @@ export default function usePert(activities){
         yStart = yStart + 50
         for(let tach in network){
             if(network[tach].predecessors[0] === "__start"){
-                console.log('item: ', network["A"])
-                console.log('first item byby')
-
                 let height = network[tach].successors.length
                 levels.push(
                     {

@@ -1,13 +1,13 @@
 import React from 'react'
 import { ErrorMessage, useField } from 'formik'
-import { InputControl } from 'formik-chakra-ui'
+import { Input } from '@chakra-ui/react'
 
 export default function InputFiled(props) {
     const [field, meta] = useField(props)
     return (
-        <>
-            <InputControl {...field} {...props} value={meta.value}/>  
-            <ErrorMessage name={field.name} component="span"/> 
-        </>
+        <div style={{position:"relative"}}>
+            <Input {...field} {...props} value={meta.value} isInvalid={meta.touched && meta.error} errorBorderColor='crimson'/>  
+            <ErrorMessage name={field.name} component="div" style={{color:"#f00", textTransform:"capitalize", fontSize:"15px", paddingLeft:"8px", position:"absolute", bottom:"4px"}}/> 
+        </div>
     )
 }

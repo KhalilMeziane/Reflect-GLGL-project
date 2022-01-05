@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form } from 'formik'
 import * as yup  from 'yup'
-import { InputControl } from 'formik-chakra-ui'
 import { Button } from '@chakra-ui/react'
+import { signupCall } from '../../services/httpClient'
+import InputFiled from './Types/InputFiled'
 
 const signupSchemaValidation = yup.object({
     name:yup.string().min(5,'user name to short').required('user name is required'),
@@ -10,39 +11,59 @@ const signupSchemaValidation = yup.object({
     password:yup.string().min(6,'password to short').required('password is required'),
 })
 
-export default function SignupForm() {
+export default function SignupForm({ history }) {
+
+    const [isLoading,setLoading] = useState(false)
+    const handleFormSubmit = async(values, actions)=>{
+        console.log("values: ",values)
+        try{
+            setLoading(true)
+            const response = await signupCall(values)
+            console.log("response: ",response)
+            const { token } = response
+            localStorage.setItem("REFLECT_TOKEN",token)
+            setLoading(false)
+            history.push('/dashboard')
+        }
+        catch(error){
+            console.log(error)
+            setLoading(false)
+            // actions.setFieldError('email',error.response.data.errors.email[0])
+        }
+    }
     return (
         <Formik
             initialValues={{ name: '', email: '', password: '' }}
             validationSchema={signupSchemaValidation}
-            onSubmit={(values)=>{
-                console.log("values: ",values)
+            onSubmit={(values, actions)=>{
+                handleFormSubmit(values, actions)
             }}
         >
             {
                ()=>(
                 <Form>
-                    <InputControl 
+                    <InputFiled 
                         name="name"
-                        placeholder="john snow"
+                        placeholder={"john snow"}
                         type="text"
                         label="User Name"
-                        my="4"
+                        my="8"
                     />
-                    <InputControl 
+                    <InputFiled 
                         name="email"
                         placeholder="exampel@gmail.com"
                         type="email"
                         label="Email"
-                        my="4"
+                        mb="8"
                     />
-                    <InputControl 
+                    <InputFiled 
                         name="password"
-                        type="Password"
+                        placeholder={"password"}
+                        type="password"
                         label="Password"
-                        mb="4"
+                        mb="8"
                     />
-                    <Button type="submit" colorScheme='green' w="full" my="2" fontWeight={"medium"}>Create Account</Button>
+                    <Button isLoading={isLoading} loadingText='Submitting' type="submit" colorScheme='green' w="full" my="2" fontWeight={"medium"}>Create Account</Button>
             </Form>
                )
             }
