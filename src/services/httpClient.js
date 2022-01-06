@@ -14,28 +14,28 @@ export const signupCall = (requestBody) => {
 
 // update profile info
 export const UpdateProfileCall = (requestBody)=>{
-    const token = localStorage.getItem("APP_TOKEN")
+    const token = localStorage.getItem("REFLECT_TOKEN")
     setAuthHeader(token)
     return axios.put(UPDATE_PROFILE, requestBody)
 }
 
 // create Project
 export const createProjectCall = (requestBody)=>{
-    const token = localStorage.getItem("APP_TOKEN")
+    const token = localStorage.getItem("REFLECT_TOKEN")
     setAuthHeader(token)
     return axios.post(CREATE_PROJECT, requestBody)
 }
 
 // edit Projects
 export const editProjectCall = (requestBody)=>{
-    const token = localStorage.getItem("APP_TOKEN")
+    const token = localStorage.getItem("REFLECT_TOKEN")
     setAuthHeader(token)
     return axios.put(EDIT_PROJECT, requestBody)
 }
 
 // delete Projects
 export const deleteProjectCall = (id)=>{
-    const token = localStorage.getItem("APP_TOKEN")
+    const token = localStorage.getItem("REFLECT_TOKEN")
     setAuthHeader(token)
-    return axios.delete(`${DELETE_PROJECT}/${id}`)
+    return axios.post(`${DELETE_PROJECT}/${id}`)
 }

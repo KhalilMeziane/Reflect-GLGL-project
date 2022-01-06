@@ -5,11 +5,13 @@ import { Box, Text, Divider, Tabs, Tab,  TabPanels, TabPanel, TabList, Flex } fr
 import { EditProject } from '../components/modals/_index'
 import Pert from '../components/charts/pert/pert'
 import { useParams } from 'react-router-dom'
+import { useProject } from '../hooks/useProject'
 
 export default function Project() {
     const { id } = useParams()
-    console.log('id: ', id)
-    
+    const { project, mutate } = useProject(id)
+    mutate()
+
     return (
         <>
             <Helmet>
@@ -18,7 +20,7 @@ export default function Project() {
             <AuthNavbar/>
             <Box px={{ base: 4, sm: 6, md: 8, xl: 28 }} py="3">
                 <Flex justify={"space-between"} align={"center"}>
-                    <Text py="3" fontSize="2xl" textTransform={"capitalize"} fontWeight={"semibold"}>Project name</Text>
+                    <Text py="3" fontSize="2xl" textTransform={"capitalize"} fontWeight={"semibold"}>{project?.data?.project?.name}</Text>
                     <EditProject/>
                 </Flex>
                 <Divider bg="black" my="3"/>

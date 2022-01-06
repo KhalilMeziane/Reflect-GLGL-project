@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { 
     Button ,
     Modal,
@@ -14,9 +14,25 @@ import {
     Text
 } from '@chakra-ui/react'
 import { BsFillTrashFill } from 'react-icons/bs'
+import { deleteProjectCall } from '../../services/httpClient'
+import {useProjects} from '../../hooks/useProjects'
 
-export default function DeleteProject() {
+ export default function DeleteProject({id, name}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [loading, setLoading] = useState(false)
+    const { mutate } = useProjects()
+    const handelDelete = async()=>{
+        try{
+            setLoading(true)
+            await deleteProjectCall(id)
+            setLoading(false)
+            mutate()
+            onClose()
+        }catch(error){
+            setLoading(false)
+            console.log(error.response)
+        }
+    }
     return (
         <>
             <IconButton
@@ -35,13 +51,14 @@ export default function DeleteProject() {
                     <ModalHeader>Delete Project</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Heading textTransform={"capitalize"} fontFamily={"poppins"} size="lg" fontWeight={"medium"} textAlign={"center"} my="2">your about to delete a project</Heading>
-                        <Text textTransform={"capitalize"} textAlign={"center"} fontSize={"lg"}>this will delete your project</Text>
-                        <Text textTransform={"capitalize"} textAlign={"center"} fontSize={"lg"}>are you sure?</Text>
+                        <Heading textTransform={"capitalize"} fontFamily={"poppins"} size="lg" fontWeight={"medium"} my="2">your about to delete a project</Heading>
+                        <Text textTransform={"capitalize"}  fontSize={"lg"}>this will delete your project</Text>
+                        <Text textTransform={"capitalize"}  fontSize={"lg"}>are you sure?</Text>
                     </ModalBody>
                     <ModalFooter>
-                        <Button colorScheme='red' mx="3" fontWeight={"medium"}>Delete</Button>
+                        <Button onClick={handelDelete} isLoading={loading} loadingText='deleting' colorScheme='red' mx="3" fontWeight={"medium"} size="md">Delete</Button>
                         <Button
+                            size="md"
                             variant={"none"}
                             onClick={onClose}
                             border="2px"

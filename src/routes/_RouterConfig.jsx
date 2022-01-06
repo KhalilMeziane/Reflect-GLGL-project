@@ -22,9 +22,7 @@ export default function RouterConfig() {
 function RequireAuth() {
     const isAuth = localStorage.getItem('REFLECT_TOKEN')? true:false
     if (!isAuth) {
-     
-      return <Navigate to="/login" />;
+      return <Navigate to="/login" />
     }
-  
-    return <Outlet />;
+    return <Outlet />
 }
