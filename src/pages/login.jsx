@@ -5,7 +5,7 @@ import { LoginForm } from '../components/Forms/_index'
 import LoginImage from '../assets/images/WebsiteLogin.svg'
 import { Link } from 'react-router-dom'
 
-export default function Login({ history }) {
+export default function Login() {
     return (
         <>
             <Helmet>
@@ -29,7 +29,7 @@ export default function Login({ history }) {
                     <GridItem colSpan={{ base: "auto", md: 6 }}>
                         <Box mb={0}>
                             <Text fontSize="3xl" fontWeight="semibold" textTransform="capitalize" pt={2}>login</Text>
-                            <LoginForm history={history}/>
+                            <LoginForm/>
                             <Text 
                                 fontSize="md" 
                                 textAlign="center" 

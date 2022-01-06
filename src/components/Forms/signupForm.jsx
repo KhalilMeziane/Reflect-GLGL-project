@@ -4,6 +4,7 @@ import * as yup  from 'yup'
 import { Button } from '@chakra-ui/react'
 import { signupCall } from '../../services/httpClient'
 import InputFiled from './Types/InputFiled'
+import { useNavigate  } from "react-router-dom"
 
 const signupSchemaValidation = yup.object({
     name:yup.string().min(5,'user name to short').required('user name is required'),
@@ -11,24 +12,22 @@ const signupSchemaValidation = yup.object({
     password:yup.string().min(6,'password to short').required('password is required'),
 })
 
-export default function SignupForm({ history }) {
-
+export default function SignupForm() {
+    const navigate = useNavigate()
     const [isLoading,setLoading] = useState(false)
     const handleFormSubmit = async(values, actions)=>{
-        console.log("values: ",values)
         try{
             setLoading(true)
             const response = await signupCall(values)
-            console.log("response: ",response)
-            const { token } = response
-            localStorage.setItem("REFLECT_TOKEN",token)
+            const [tokenObject] = response.data
+            localStorage.setItem("REFLECT_TOKEN",tokenObject.token)
             setLoading(false)
-            history.push('/dashboard')
+            navigate('/profile')
         }
         catch(error){
-            console.log(error)
             setLoading(false)
-            // actions.setFieldError('email',error.response.data.errors.email[0])
+            const field = error.response.data.errors[0].includes('email has already')? 'email': ''
+            actions.setFieldError(field, error.response.data.errors[0])
         }
     }
     return (

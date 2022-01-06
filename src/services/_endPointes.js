@@ -1,8 +1,8 @@
-const Domain = 'http://127.0.0.1:8000/api'
+const Domain = 'http://127.0.0.1:8000/api/v1'
 
 // auth
-export const LOGIN = `${Domain}/login`
-export const SIGNUP = `${Domain}/register`
+export const LOGIN = `${Domain}/auth/login`
+export const SIGNUP = `${Domain}/auth/register`
 
 // PROFILE
 export const GET_PROFILE = `${Domain}/profile`

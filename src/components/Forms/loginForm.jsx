@@ -4,30 +4,29 @@ import * as yup  from 'yup'
 import { Button } from '@chakra-ui/react'
 import { loginCall } from '../../services/httpClient'
 import InputFiled from './Types/InputFiled'
+import { useNavigate  } from "react-router-dom"
 
 const loginSchemaValidation = yup.object({
     email:yup.string().email('invalid email').required('email is required'),
     password:yup.string().min(6,'password to short').required('password is required')
 })
 
-export default function LoginForm({history}) {
-
+export default function LoginForm(){
+    const navigate = useNavigate()
     const [isLoading,setLoading] = useState(false)
     const handleFormSubmit = async(values, actions)=>{
-        console.log("values: ",values)
         try{
             setLoading(true)
             const response = await loginCall(values)
-            console.log("response: ",response)
-            const { token } = response
-            localStorage.setItem("REFLECT_TOKEN",token)
+            const [tokenObject] = response.data
+            localStorage.setItem("REFLECT_TOKEN", tokenObject.token)
             setLoading(false)
-            history.push('/dashboard')
+            navigate('/profile')
         }
         catch(error){
-            console.log(error)
             setLoading(false)
-            // actions.setFieldError('email',error.response.data.errors.email[0])
+            const field = error?.response?.data?.message.includes('User')? 'email': 'password'
+            actions.setFieldError(field, error?.response?.data?.message)
         }
     }
     return (

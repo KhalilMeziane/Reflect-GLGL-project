@@ -5,7 +5,7 @@ import { Box, GridItem, SimpleGrid, Text, Image } from "@chakra-ui/react"
 import { SignupForm } from '../components/Forms/_index'
 import WebsiteSignIn from '../assets/images/WebsiteSignIn.svg'
 
-export default function Login() {
+export default function Signup() {
     return (
         <>
             <Helmet>
@@ -29,7 +29,7 @@ export default function Login() {
                     <GridItem colSpan={{ base: "auto", md: 6 }}>
                         <Box mb={6}>
                             <Text fontSize="3xl" fontWeight="semibold" textTransform="capitalize" pt={2}>create account</Text>
-                            <SignupForm/>
+                            <SignupForm />
                             <Text 
                                 fontSize="md" 
                                 textAlign="center" 
