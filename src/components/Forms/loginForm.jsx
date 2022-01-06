@@ -46,7 +46,7 @@ export default function LoginForm({history}) {
                             placeholder="exampel@gmail.com"
                             type="email"
                             label="Email"
-                            my="8"
+                            mb="8"
                         />
                         <InputFiled 
                             name="password"

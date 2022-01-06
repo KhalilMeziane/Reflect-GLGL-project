@@ -1,8 +1,9 @@
 import React from 'react'
 import { Formik, Form, FieldArray } from 'formik'
-import { InputControl } from 'formik-chakra-ui'
+import * as yup  from 'yup'
 import { Button , HStack, Flex, Text, Box, SimpleGrid, ModalFooter } from '@chakra-ui/react'
 import { BsFillTrashFill } from 'react-icons/bs'
+import InputFiled from './Types/InputFiled'
 
 const initialValues = {
     project: '',
@@ -24,10 +25,24 @@ const initialValues = {
       },
     ],
 }
+
+const createSchemaValidation = yup.object({
+    project: yup.string().min(6,'project name to short').required('project name is required'),
+    tachs: yup.array()
+        .of(
+            yup.object().shape({
+                name: yup.string().min(4, 'too short').required('Required'),
+                duration: yup.string().min(3, 'too short').required('Required'), 
+                antecedents: yup.string().min(3, 'too short').required('Required'),
+            })
+        )
+})
+
 export default function CreateForm({onClose}) {
     return (
         <Formik
             initialValues={initialValues}
+            validationSchema={createSchemaValidation}
             onSubmit={(values)=>{
                 console.log("values: ",values)
             }}
@@ -35,11 +50,12 @@ export default function CreateForm({onClose}) {
             {
                 ({values})=>(
                     <Form>
-                        <InputControl 
+                        <InputFiled 
                             name="project"
-                            placeholder="khalil project"
+                            placeholder="project"
                             type="text"
-                            label="Project Name"
+                            label="Project"
+                            mb="8"
                         />
                         <FieldArray name="tachs">
                             {
@@ -51,29 +67,30 @@ export default function CreateForm({onClose}) {
                                         {
                                             values.tachs.map((tach,index)=>(
                                                 <Box mt="1" key={index}>
-                                                    <Flex justify={"space-between"} align={"center"} py="1">
+                                                    <Flex justify={"space-between"} align={"center"}>
                                                         <Text mb='1px'>Tach {index+1}:</Text>
                                                         <Button 
                                                             colorScheme="red" 
                                                             rounded={"sm"} 
                                                             size="sm" 
                                                             onClick={() => remove(index)}
+                                                            disabled={values.tachs.length < 4}
                                                         >
                                                             <BsFillTrashFill/>
                                                         </Button>
                                                     </Flex>
                                                     <HStack>   
-                                                            <InputControl 
+                                                            <InputFiled 
                                                                 name={`tachs.${index}.name`}
                                                                 placeholder="tach name"
                                                                 type="text"
                                                             />
-                                                            <InputControl 
+                                                            <InputFiled 
                                                                 name={`tachs.${index}.duration`}
                                                                 placeholder="tach duration"
                                                                 type="text"
                                                             />
-                                                            <InputControl 
+                                                            <InputFiled 
                                                                 name={`tachs.${index}.antecedents`}
                                                                 placeholder="tach antecedents"
                                                                 type="text"
@@ -87,6 +104,7 @@ export default function CreateForm({onClose}) {
                                             colorScheme='blue'
                                             fontWeight={"normal"}
                                             onClick={() => push({ name: '', duration: '', antecedents:'' })}
+                                            disabled={values.tachs.length >= 10}
                                         >add new tach</Button>
                                     </SimpleGrid>
                                 )

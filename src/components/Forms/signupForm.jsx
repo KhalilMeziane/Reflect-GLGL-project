@@ -47,7 +47,7 @@ export default function SignupForm({ history }) {
                         placeholder={"john snow"}
                         type="text"
                         label="User Name"
-                        my="8"
+                        mb="8"
                     />
                     <InputFiled 
                         name="email"
