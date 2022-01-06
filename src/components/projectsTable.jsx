@@ -15,12 +15,12 @@ import { Link } from 'react-router-dom'
 import { DeleteProject } from '../components/modals/_index'
 
 export default function projectsTable() {
-  const header = ['project', 'created', 'actions']
+  const header = ['project', 'actions']
   const data = [
-    { name: 'Daggy', created: '7 days ago' },
-    { name: 'Anubra', created: '23 hours ago' },
-    { name: 'Josef', created: 'A few seconds ago' },
-    { name: 'Sage', created: 'A few hours ago' },
+    { name: 'Daggy'},
+    { name: 'Anubra',},
+    { name: 'Josef',},
+    { name: 'Sage',},
   ]
   return (
     <Flex
@@ -131,7 +131,19 @@ export default function projectsTable() {
                 >
                   Actions
                 </Td>
-                <Td>
+                <Td
+                  display={{
+                    base: 'table-cell',
+                    md: 'block',
+                  }}
+                  sx={{
+                    '@media print': {
+                      display: 'none',
+                    },
+                    textTransform: 'uppercase',
+                    fontWeight: 'bold',
+                  }}
+                >
                   <ButtonGroup variant="solid" size="sm" spacing={3}>
                     <Link to="/dashboard/5">
                       <IconButton

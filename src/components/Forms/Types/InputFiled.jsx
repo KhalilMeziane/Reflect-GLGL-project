@@ -8,7 +8,7 @@ export default function InputFiled(props) {
         <div style={{position:"relative"}}>
             <label htmlFor={field.name} style={{marginBottom:"3px"}}>{props.label}</label>
             <Input {...field} {...props} value={meta.value} isInvalid={meta.touched && meta.error} errorBorderColor='crimson'/>  
-            <ErrorMessage name={field.name} component="div" style={{color:"#f00", textTransform:"capitalize", fontSize:"15px", paddingLeft:"8px", position:"absolute", bottom:"4px"}}/> 
+            <ErrorMessage name={field.name} component="div" style={{color:"#f00", textTransform:"capitalize", fontSize:"15px", paddingLeft:"8px", position:"absolute", bottom:"0px"}}/> 
         </div>
     )
 }

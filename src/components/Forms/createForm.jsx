@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, FieldArray } from 'formik'
 import * as yup  from 'yup'
 import { Button , HStack, Flex, Text, Box, SimpleGrid, ModalFooter } from '@chakra-ui/react'
 import { BsFillTrashFill } from 'react-icons/bs'
 import InputFiled from './Types/InputFiled'
+import { createProjectCall } from '../../services/httpClient'
 
 const initialValues = {
     project: '',
@@ -38,13 +39,32 @@ const createSchemaValidation = yup.object({
         )
 })
 
-export default function CreateForm({onClose}) {
+export default function CreateForm({onClose, history}) {
+
+    const [isLoading, setLoading] = useState(false)
+    const handleFormSubmit = async(values, actions)=>{
+        console.log("values: ",values)
+        try{
+            setLoading(true)
+            const response = await createProjectCall(values)
+            console.log("response: ",response)
+            setTimeout(()=>{
+                setLoading(false)
+            },3000)
+            // setLoading(false)
+            // history.push(`/dashboard/${response.id}`)
+        }
+        catch(error){
+            console.log(error)
+            setLoading(false)
+        }
+    }
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={createSchemaValidation}
-            onSubmit={(values)=>{
-                console.log("values: ",values)
+            onSubmit={(values, actions)=>{
+                handleFormSubmit(values, actions)
             }}
         >
             {
@@ -55,20 +75,20 @@ export default function CreateForm({onClose}) {
                             placeholder="project"
                             type="text"
                             label="Project"
-                            mb="8"
+                            mb="7"
                         />
                         <FieldArray name="tachs">
                             {
                                 ({ insert, remove, push })=>(
                                     <SimpleGrid
                                         columns={1}
-                                        spacing={4}
+                                        spacing={2}
                                     >
                                         {
                                             values.tachs.map((tach,index)=>(
-                                                <Box mt="1" key={index}>
-                                                    <Flex justify={"space-between"} align={"center"}>
-                                                        <Text mb='1px'>Tach {index+1}:</Text>
+                                                <Box mt="-2" key={index}>
+                                                    <Flex justify={"space-between"} align={"center"} mb='1'>
+                                                        <Text>Tach {index+1}:</Text>
                                                         <Button 
                                                             colorScheme="red" 
                                                             rounded={"sm"} 
@@ -80,21 +100,24 @@ export default function CreateForm({onClose}) {
                                                         </Button>
                                                     </Flex>
                                                     <HStack>   
-                                                            <InputFiled 
-                                                                name={`tachs.${index}.name`}
-                                                                placeholder="tach name"
-                                                                type="text"
-                                                            />
-                                                            <InputFiled 
-                                                                name={`tachs.${index}.duration`}
-                                                                placeholder="tach duration"
-                                                                type="text"
-                                                            />
-                                                            <InputFiled 
-                                                                name={`tachs.${index}.antecedents`}
-                                                                placeholder="tach antecedents"
-                                                                type="text"
-                                                            /> 
+                                                        <InputFiled 
+                                                            name={`tachs.${index}.name`}
+                                                            placeholder="tach name"
+                                                            type="text"
+                                                            mb="7"
+                                                        />
+                                                        <InputFiled 
+                                                            name={`tachs.${index}.duration`}
+                                                            placeholder="tach duration"
+                                                            type="text"
+                                                            mb="7"
+                                                        />
+                                                        <InputFiled 
+                                                            name={`tachs.${index}.antecedents`}
+                                                            placeholder="tach antecedents"
+                                                            type="text"
+                                                            mb="7"
+                                                        /> 
                                                     </HStack>
                                                 </Box>
                                             ))
@@ -112,7 +135,7 @@ export default function CreateForm({onClose}) {
                             
                         </FieldArray>
                         <ModalFooter pr='0'>
-                            <Button colorScheme='green' mr="3" fontWeight={"medium"} type="submit">Create</Button>
+                            <Button isLoading={isLoading} loadingText='Creating' colorScheme='green' mr="3" fontWeight={"medium"} type="submit">Create</Button>
                             <Button
                                 variant={"none"}
                                 onClick={onClose}
