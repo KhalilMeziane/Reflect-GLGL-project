@@ -4,8 +4,12 @@ import { AuthNavbar } from '../components/_index'
 import { Box, Text, Divider, Tabs, Tab,  TabPanels, TabPanel, TabList, Flex } from '@chakra-ui/react'
 import { EditProject } from '../components/modals/_index'
 import Pert from '../components/charts/pert/pert'
+import { useParams } from 'react-router-dom'
 
 export default function Project() {
+    const { id } = useParams()
+    console.log('id: ', id)
+    
     return (
         <>
             <Helmet>
