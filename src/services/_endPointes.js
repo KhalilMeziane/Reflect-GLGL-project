@@ -5,8 +5,8 @@ export const LOGIN = `${Domain}/auth/login`
 export const SIGNUP = `${Domain}/auth/register`
 
 // PROFILE
-export const GET_PROFILE = `${Domain}/profile`
-export const UPDATE_PROFILE = `${Domain}/profile/update`
+export const GET_PROFILE = `${Domain}/user`
+export const UPDATE_PROFILE = `${Domain}/user/update`
 
 // project
 export const CREATE_PROJECT = `${Domain}/user/project/create`

@@ -16,7 +16,7 @@ export const signupCall = (requestBody) => {
 export const UpdateProfileCall = (requestBody)=>{
     const token = localStorage.getItem("REFLECT_TOKEN")
     setAuthHeader(token)
-    return axios.put(UPDATE_PROFILE, requestBody)
+    return axios.post(UPDATE_PROFILE, requestBody)
 }
 
 // create Project

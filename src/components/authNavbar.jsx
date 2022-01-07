@@ -15,8 +15,10 @@ import {
 import { BiCaretDown , BiLogOut, BiUser, BiHomeAlt } from "react-icons/bi"
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { useProfile } from './../hooks/useProfile'
 
 export default function Dsll() {
+  const { user } = useProfile()
   const navigate = useNavigate()
   return (
     <>
@@ -38,7 +40,7 @@ export default function Dsll() {
           >
             <Popover>
               <PopoverTrigger>
-                <Button variant="none" outline={"none"} rightIcon={<BiCaretDown />} fontWeight="normal" textTransform="capitalize">khalil meziane</Button>
+                <Button variant="none" outline={"none"} rightIcon={<BiCaretDown />} fontWeight="normal" textTransform="capitalize">{user?.data?.user?.name}</Button>
               </PopoverTrigger>
               <PopoverContent w="44">
                 <PopoverArrow />

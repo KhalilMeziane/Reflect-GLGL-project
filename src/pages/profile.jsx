@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Formik, Form } from 'formik'
+import * as yup  from 'yup'
 import { Helmet } from "react-helmet"
 import { AuthNavbar } from '../components/_index'
-// import { Link } from 'react-router-dom'
-import { Box, Button, Flex, Input, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import InputFiled from '../components/Forms/Types/InputFiled'
+import { useProfile } from './../hooks/useProfile'
+import { UpdateProfileCall } from '../services/httpClient'
+const updateSchemaValidation = yup.object({
+    name:yup.string().min(6,'name to short').required('name is required')
+})
 
-export default function profile() {
+export default function Profile() {
+    const { user, mutate } = useProfile()
+    const [isLoading,setLoading] = useState(false)
+    const handleFormSubmit = async(values, actions)=>{
+        try{
+            setLoading(true)
+            const response = await UpdateProfileCall(values)
+            mutate()
+            console.log(response)
+            setLoading(false)
+        }
+        catch(error){
+            setLoading(false)
+            console.log(error.response)
+        }
+    }
     return (
         <>
             <Helmet>
@@ -20,7 +42,6 @@ export default function profile() {
                 mx="auto"
                 w={{base: 11/12, lg:10/12}}
             >
-                {/* <Text as="h1" fontWeight="semibold" fontSize="3xl">Account</Text> */}
                 <Box>
                     <Text 
                         color="gray.900" 
@@ -43,7 +64,7 @@ export default function profile() {
                             fontSize="xl" 
                             fontWeight="semibold"
                         >
-                            khalilmez2000@gmail.com
+                            {user?.data?.user?.email}
                         </Text>
                     </Box>
                     <hr/>
@@ -52,42 +73,35 @@ export default function profile() {
                         p={5}
                         spacing={4}
                     >
-                        <Stack>
-                            <Text mb='3px' textTransform="capitalize">email address</Text>
-                            <Input
-                                type="email"
-                                placeholder="exampel@gmail.com"
-                                required="true"
-                                color="gray.900"
-                                borderColor="gray.300"
-                                border="2px"
-                                borderStyle="solid"
-                                size="lg"
-                                w={{base: "full", lg:5/12}}
-                            />
-                        </Stack>
-                        <Stack>
-                            <Text mb='3px' textTransform="capitalize">full name</Text>
-                            <Input
-                                type="text"
-                                placeholder="john snow"
-                                required="true"
-                                color="gray.900"
-                                borderColor="gray.300"
-                                border="2px"
-                                borderStyle="solid"
-                                size="lg"
-                                w={{base: "full", lg:5/12}}
-                            />
-                        </Stack>
-                       <Flex gap="2">
-                            <Button bg="green.500" fontSize="lg" textTransform="capitalize" variant="none" color="white"  py={4} type="submit" px="10" fontWeight="normal">
-                                save
-                            </Button>
-                            <Button border="2px" color="green.500"  borderStyle="solid" borderColor="green.500" fontSize="lg" variant="none" px="10" textTransform="capitalize" fontWeight="normal"  py={4} type="submit">
-                                cancel
-                            </Button>
-                       </Flex>
+                        <Formik
+                            initialValues={{ name: user?.data?.user?.name}}
+                            validationSchema={updateSchemaValidation}
+                            onSubmit={(values, actions)=>{
+                                handleFormSubmit(values, actions)
+                            }}
+                        >
+                            {
+                                ()=>(
+                                    <Form>
+                                        <InputFiled 
+                                            name="name"
+                                            placeholder={"user name"}
+                                            type="text"
+                                            label="Name"
+                                            mb="8"
+                                        />
+                                        <Flex gap="2" mt="3">
+                                            <Button isLoading={isLoading} loadingText='Updating' colorScheme='green' type="submit">
+                                                Update
+                                            </Button>
+                                            <Button colorScheme='green' variant={"outline"} type="reset">
+                                                Reset
+                                            </Button>
+                                        </Flex>
+                                    </Form>
+                                )
+                            }
+                        </Formik>
                     </SimpleGrid>
                 </Box>
             </Box>

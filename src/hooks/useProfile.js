@@ -5,7 +5,7 @@ import { GET_PROFILE } from '../services/_endPointes'
 
 export function useProfile(){
     const fetcher = ()=>{
-        const token = localStorage.getItem("APP_TOKEN")
+        const token = localStorage.getItem("REFLECT_TOKEN")
         _setAuthHeader(token)
         if(token){
             return axios.get(GET_PROFILE)
