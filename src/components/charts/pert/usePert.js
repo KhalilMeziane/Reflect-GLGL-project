@@ -2,7 +2,7 @@ import jsPERT from 'js-pert'
 import Node from './node'
 
 export default function usePert(activities){
-    const { activitiesParams, network, criticalPath } = jsPERT(activities)
+    const { activitiesParams, network, criticalPath, earliestStartTimes, earliestFinishTimes, latestFinishTimes, latestStartTimes } = jsPERT(activities)
     // console.log('activities: ', jsPERT(activities))
 
     let xStart = 10
@@ -33,9 +33,6 @@ export default function usePert(activities){
         
     }
     setPosition()
-
-
-
     const nodes = []
     let indexPosition = -1
     for(let tach in activitiesParams){
@@ -43,7 +40,13 @@ export default function usePert(activities){
         nodes.push({
             id: tach,
             data:{
-                label: <Node expectedTime={activitiesParams[tach].expectedTime} name={tach}/>
+                label: <Node 
+                    name={tach}
+                    EST={earliestStartTimes[tach]} 
+                    EFT={earliestFinishTimes[tach]}
+                    LFT={latestFinishTimes[tach]}
+                    LST={latestStartTimes[tach]}
+                />
             },
             targetPosition: 'right',
             sourcePosition: 'left',
