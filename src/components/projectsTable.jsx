@@ -21,11 +21,11 @@ export default function ProjectsTable() {
     const projectList = projects?.projects
     return (
       <Flex
-          w="full"
-          px={{ base: 4, sm: 6, md: 8, xl: 28 }}
-          py="8"
-          alignItems="center"
-          justifyContent="center"
+        w="full"
+        px={{ base: 4, sm: 6, md: 8, xl: 28 }}
+        py="8"
+        alignItems="center"
+        justifyContent="center"
       >
         <Table
             w="full"

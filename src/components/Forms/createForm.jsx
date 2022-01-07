@@ -11,19 +11,19 @@ const initialValues = {
     name: 'khalil',
     tasks: [
       {
-        name: 'dkjkjds',
-        duration: '5',
-        previos: 'sdsjds;,',
+        name: 'A',
+        duration: '4',
+        previos: '',
       },
       {
-        name: 'dkjkjds',
-        duration: '5',
-        previos: 'sdsjds;,',
+        name: 'B',
+        duration: '9',
+        previos: 'A',
       },
       {
-        name: 'dkjkjds',
-        duration: '5',
-        previos: 'sdsjds;,',
+        name: 'C',
+        duration: '12',
+        previos: 'B',
       },
     ],
 }
@@ -43,9 +43,20 @@ export default function CreateForm({onClose}) {
     const navigate = useNavigate()
     const [isLoading, setLoading] = useState(false)
     const handleFormSubmit = async(values, actions)=>{
+        const project = {}
+        project.name = values.name
+        const tasks = []
+        values.tasks.forEach(({name, duration, previos})=>{
+            tasks.push({
+                name,
+                duration,
+                previos : !previos || previos.length === 0 || previos !== undefined ? []: previos.split(/,| /)
+            })
+        })
+        project.tasks = [...tasks]
         try{
             setLoading(true)
-            const response = await createProjectCall(values)
+            const response = await createProjectCall(project)
             const { id }= response.data.project
             setLoading(false)
             navigate(`/dashboard/${id}`)
@@ -98,19 +109,19 @@ export default function CreateForm({onClose}) {
                                                     <HStack>   
                                                         <InputFiled 
                                                             name={`tasks.${index}.name`}
-                                                            placeholder="tach name"
+                                                            placeholder="name"
                                                             type="text"
                                                             mb="7"
                                                         />
                                                         <InputFiled 
                                                             name={`tasks.${index}.duration`}
-                                                            placeholder="tach duration"
+                                                            placeholder="duration"
                                                             type="text"
                                                             mb="7"
                                                         />
                                                         <InputFiled 
                                                             name={`tasks.${index}.previos`}
-                                                            placeholder="tach antecedents"
+                                                            placeholder="antecedents"
                                                             type="text"
                                                             mb="7"
                                                         /> 

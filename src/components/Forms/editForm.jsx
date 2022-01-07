@@ -12,18 +12,30 @@ const editSchemaValidation = yup.object({
         .of(
             yup.object().shape({
                 name: yup.string().min(1, 'too short').required('Required'),
-                duration: yup.string().min(1, 'too short').required('Required'), 
-                // previos: yup.string().min(1, 'too short').required('Required'),
+                duration: yup.string().min(1, 'too short').required('Required')
             })
         )
 })
 
 export default function EditForm({onClose, project}) {
+    // console.log("project: ", project)
     const [isLoading, setLoading] = useState(false)
     const handleFormSubmit = async(values)=>{
+        const projectUpdated = {}
+        projectUpdated.name = values.name
+        const tasks = []
+        values.tasks.forEach(({name, duration, previos})=>{
+            tasks.push({
+                name,
+                duration,
+                previos : !previos || previos.length === 0 ? []: previos.split(/,| /)
+            })
+        })
+        projectUpdated.tasks = [...tasks]
+        // console.log("projectUpdated: ", projectUpdated)
         try{
             setLoading(true)
-            await editProjectCall(project.id, values)
+            await editProjectCall(project.id, projectUpdated)
             setLoading(false)
             onClose()
         }
@@ -91,6 +103,7 @@ export default function EditForm({onClose, project}) {
                                                                 placeholder="tach antecedents"
                                                                 type="text"
                                                                 mb="7"
+                                                                value={values?.tasks[index]?.previous?.toString()}
                                                             /> 
                                                     </HStack>
                                                 </Box>

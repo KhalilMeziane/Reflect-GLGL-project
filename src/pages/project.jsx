@@ -11,7 +11,6 @@ export default function Project() {
     const { id } = useParams()
     const { project, mutate } = useProject(id)
     mutate()
-
     return (
         <>
             <Helmet>
@@ -31,7 +30,7 @@ export default function Project() {
                     </TabList>
                     <TabPanels>
                         <TabPanel>
-                            <Pert/>
+                            <Pert tasks={project?.data?.project?.tasks}/>
                         </TabPanel>
                         <TabPanel>
                             <p>this is gant chart!!</p>
