@@ -3,7 +3,7 @@ import Node from './node'
 
 export default function usePert(activities){
     const { activitiesParams, network, criticalPath } = jsPERT(activities)
-    console.log('activities: ', jsPERT(activities))
+    // console.log('activities: ', jsPERT(activities))
 
     let xStart = 10
     let yStart = 25

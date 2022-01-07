@@ -9,8 +9,8 @@ export const GET_PROFILE = `${Domain}/profile`
 export const UPDATE_PROFILE = `${Domain}/profile/update`
 
 // project
-export const CREATE_PROJECT = `${Domain}/create`
+export const CREATE_PROJECT = `${Domain}/user/project/create`
 export const GET_PROJECTS = `${Domain}/user/project`
 export const GET_PROJECT = `${Domain}/user/project`
-export const EDIT_PROJECT = `${Domain}/project/:id`
+export const EDIT_PROJECT = `${Domain}/user/project/update`
 export const DELETE_PROJECT = `${Domain}/user/project/delete`

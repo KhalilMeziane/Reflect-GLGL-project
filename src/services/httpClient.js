@@ -27,10 +27,10 @@ export const createProjectCall = (requestBody)=>{
 }
 
 // edit Projects
-export const editProjectCall = (requestBody)=>{
+export const editProjectCall = (id, requestBody)=>{
     const token = localStorage.getItem("REFLECT_TOKEN")
     setAuthHeader(token)
-    return axios.put(EDIT_PROJECT, requestBody)
+    return axios.post(`${EDIT_PROJECT}/${id}`, requestBody)
 }
 
 // delete Projects

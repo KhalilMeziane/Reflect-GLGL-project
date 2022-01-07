@@ -3,7 +3,7 @@ import { Button, Modal, ModalOverlay, ModalContent, ModalHeader ,ModalBody, Moda
 import { BiEdit } from 'react-icons/bi'
 import { EditForm } from '../Forms/_index' 
 
-export default function EditProject() {
+export default function EditProject({project}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
@@ -13,12 +13,12 @@ export default function EditProject() {
                 onClose={onClose}
                 size={"xl"}
             >
-                <ModalOverlay />
+                <ModalOverlay/>
                 <ModalContent>
                     <ModalHeader>Edit Project</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <EditForm onClose={onClose}/>
+                        <EditForm onClose={onClose} project={project}/>
                     </ModalBody>
                 </ModalContent>
             </Modal>

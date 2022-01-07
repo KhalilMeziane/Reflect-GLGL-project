@@ -12,11 +12,12 @@ import {
   PopoverBody,
   PopoverArrow,
 } from "@chakra-ui/react"
-import { BiCaretDown , BiLogOut, BiUser, BiHomeAlt } from "react-icons/bi";
+import { BiCaretDown , BiLogOut, BiUser, BiHomeAlt } from "react-icons/bi"
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Dsll() {
-
+  const navigate = useNavigate()
   return (
     <>
       <chakra.header
@@ -55,12 +56,12 @@ export default function Dsll() {
                         <Text fontSize="lg" textTransform="capitalize">profile</Text>
                       </Flex>
                     </Link>
-                    <Link to="/logout">
+                    <Text cursor={"pointer"} display={"block"} mt="-4" variant={"none"} fontSize="lg" fontWeight={"medium"} textTransform="capitalize" onClick={()=>{ localStorage.clear(); navigate('/login')}}>
                       <Flex gap="2" justifyItems={"center"} alignItems={"center"}>
                         <BiLogOut/>
                         <Text fontSize="lg" textTransform="capitalize">logout</Text>
                       </Flex>
-                    </Link>
+                    </Text>
                   </VStack>
                 </PopoverBody>
               </PopoverContent>

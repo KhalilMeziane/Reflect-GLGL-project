@@ -4,62 +4,38 @@ import * as yup  from 'yup'
 import { Button , HStack, Flex, Text, Box, SimpleGrid, ModalFooter } from '@chakra-ui/react'
 import { BsFillTrashFill } from 'react-icons/bs'
 import InputFiled from './Types/InputFiled'
-import { createProjectCall } from '../../services/httpClient'
+import { editProjectCall } from '../../services/httpClient'
 
 const editSchemaValidation = yup.object({
-    project: yup.string().min(6,'project name to short').required('project name is required'),
-    tachs: yup.array()
+    name: yup.string().min(6,'project name to short').required('project name is required'),
+    tasks: yup.array()
         .of(
             yup.object().shape({
-                name: yup.string().min(4, 'too short').required('Required'),
-                duration: yup.string().min(3, 'too short').required('Required'), 
-                antecedents: yup.string().min(3, 'too short').required('Required'),
+                name: yup.string().min(1, 'too short').required('Required'),
+                duration: yup.string().min(1, 'too short').required('Required'), 
+                // previos: yup.string().min(1, 'too short').required('Required'),
             })
         )
 })
 
-const initialValues = {
-    project: '',
-    tachs: [
-      {
-        name: '',
-        duration: '',
-        antecedents: '',
-      },
-      {
-        name: '',
-        duration: '',
-        antecedents: '',
-      },
-      {
-        name: '',
-        duration: '',
-        antecedents: '',
-      },
-    ],
-}
-
-export default function EditForm({onClose}) {
+export default function EditForm({onClose, project}) {
     const [isLoading, setLoading] = useState(false)
     const handleFormSubmit = async(values)=>{
-        console.log("values: ",values)
         try{
             setLoading(true)
-            const response = await createProjectCall(values)
-            console.log("response: ",response)
-            setTimeout(()=>{
-                setLoading(false)
-            },3000)
-            // setLoading(false)
+            await editProjectCall(project.id, values)
+            setLoading(false)
+            onClose()
         }
         catch(error){
-            console.log(error)
+            console.log(error.response)
             setLoading(false)
+            onClose()
         }
     }
     return (
         <Formik
-            initialValues={initialValues}
+            initialValues={project}
             validationSchema={editSchemaValidation}
             onSubmit={(values)=>{
                 handleFormSubmit(values)
@@ -69,13 +45,13 @@ export default function EditForm({onClose}) {
                 ({values})=>(
                     <Form>
                         <InputFiled 
-                            name="project"
-                            placeholder="khalil project"
+                            name="name"
+                            placeholder="project"
                             type="text"
                             label="Project Name"
                             mb="7"
                         />
-                        <FieldArray name="tachs">
+                        <FieldArray name="tasks">
                             {
                                 ({ insert, remove, push })=>(
                                     <SimpleGrid
@@ -83,7 +59,7 @@ export default function EditForm({onClose}) {
                                         spacing={2}
                                     >
                                         {
-                                            values.tachs.map((tach,index)=>(
+                                            values.tasks.map((task,index)=>(
                                                 <Box mt="-2" key={index}>
                                                     <Flex justify={"space-between"} align={"center"} mb="1">
                                                         <Text>Tach {index+1}:</Text>
@@ -92,26 +68,26 @@ export default function EditForm({onClose}) {
                                                             rounded={"sm"} 
                                                             size="sm" 
                                                             onClick={() => remove(index)}
-                                                            disabled={values.tachs.length < 4}
+                                                            disabled={values.tasks.length < 4}
                                                         >
                                                             <BsFillTrashFill/>
                                                         </Button>
                                                     </Flex>
                                                     <HStack>   
                                                             <InputFiled 
-                                                                name={`tachs.${index}.name`}
+                                                                name={`tasks.${index}.name`}
                                                                 placeholder="tach name"
                                                                 type="text"
                                                                 mb="7"
                                                             />
                                                             <InputFiled 
-                                                                name={`tachs.${index}.duration`}
+                                                                name={`tasks.${index}.duration`}
                                                                 placeholder="tach duration"
                                                                 type="text"
                                                                 mb="7"
                                                             />
                                                             <InputFiled 
-                                                                name={`tachs.${index}.antecedents`}
+                                                                name={`tasks.${index}.previos`}
                                                                 placeholder="tach antecedents"
                                                                 type="text"
                                                                 mb="7"
@@ -124,13 +100,12 @@ export default function EditForm({onClose}) {
                                             textTransform={"capitalize"}
                                             colorScheme='blue'
                                             fontWeight={"normal"}
-                                            onClick={() => push({ name: '', duration: '', antecedents:'' })}
-                                            disabled={values.tachs.length >= 10}
+                                            onClick={() => push({ name: '', duration: '', previos:'' })}
+                                            disabled={values.tasks.length >= 10}
                                         >add new tach</Button>
                                     </SimpleGrid>
                                 )
                             }
-                            
                         </FieldArray>
                         <ModalFooter pr='0'>
                             <Button isLoading={isLoading} loadingText='Updating' colorScheme='green' mr="3" fontWeight={"medium"} type="submit">Update</Button>
