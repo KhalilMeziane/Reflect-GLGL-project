@@ -18,21 +18,20 @@ const editSchemaValidation = yup.object({
 })
 
 export default function EditForm({onClose, project}) {
-    // console.log("project: ", project)
+    console.log("project start: ", project)
     const [isLoading, setLoading] = useState(false)
     const handleFormSubmit = async(values)=>{
         const projectUpdated = {}
         projectUpdated.name = values.name
         const tasks = []
-        values.tasks.forEach(({name, duration, previos})=>{
+        values.tasks.forEach(({name, duration, previous})=>{
             tasks.push({
                 name,
                 duration,
-                previos : !previos || previos.length === 0 ? []: previos.split(/,| /)
+                previous : !previous || previous.length === 0 ? []: previous.split(/,| /)
             })
         })
         projectUpdated.tasks = [...tasks]
-        // console.log("projectUpdated: ", projectUpdated)
         try{
             setLoading(true)
             await editProjectCall(project.id, projectUpdated)
@@ -45,6 +44,17 @@ export default function EditForm({onClose, project}) {
             onClose()
         }
     }
+
+    // let list = []
+    // project.tasks.forEach((task,index)=>{
+    //     task.previous.forEach(item=>{
+    //         // list.push(item.name)
+    //     })
+    //     project.tasks[index].previous = list
+    //     list = []
+    // })
+    // console.log("after: ", project)
+
     return (
         <Formik
             initialValues={project}
@@ -99,12 +109,13 @@ export default function EditForm({onClose, project}) {
                                                                 mb="7"
                                                             />
                                                             <InputFiled 
-                                                                name={`tasks.${index}.previos`}
+                                                                name={`tasks.${index}.previous`}
                                                                 placeholder="tach antecedents"
                                                                 type="text"
                                                                 mb="7"
-                                                                value={values?.tasks[index]?.previous?.toString()}
+                                                                // value={values?.tasks[index].previous.map(item=>item.name).join()}
                                                             /> 
+                                                            {/* {console.log("val: ",typeof(values?.tasks[index].previous.map(item=>item.name).join()))} */}
                                                     </HStack>
                                                 </Box>
                                             ))

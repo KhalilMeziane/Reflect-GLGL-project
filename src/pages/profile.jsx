@@ -89,6 +89,8 @@ export default function Profile() {
                                             type="text"
                                             label="Name"
                                             mb="8"
+                                            w="62"
+                                            display="block"
                                         />
                                         <Flex gap="2" mt="3">
                                             <Button isLoading={isLoading} loadingText='Updating' colorScheme='green' type="submit">
