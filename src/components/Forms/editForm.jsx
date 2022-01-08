@@ -45,19 +45,21 @@ export default function EditForm({onClose, project}) {
         }
     }
 
-    // let list = []
-    // project.tasks.forEach((task,index)=>{
-    //     task.previous.forEach(item=>{
-    //         // list.push(item.name)
-    //     })
-    //     project.tasks[index].previous = list
-    //     list = []
-    // })
-    // console.log("after: ", project)
+    const projectUpdated = {}
+        projectUpdated.name = project.name
+        const tasks = []
+        project.tasks.forEach(({name, duration, previous})=>{
+            tasks.push({
+                name,
+                duration,
+                previous : previous.map(item=>item.name).join()
+            })
+        })
+        projectUpdated.tasks = [...tasks]
 
     return (
         <Formik
-            initialValues={project}
+            initialValues={projectUpdated}
             validationSchema={editSchemaValidation}
             onSubmit={(values)=>{
                 handleFormSubmit(values)

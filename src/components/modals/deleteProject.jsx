@@ -51,9 +51,8 @@ import {useProjects} from '../../hooks/useProjects'
                     <ModalHeader>Delete Project</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Heading textTransform={"capitalize"} fontFamily={"poppins"} size="lg" fontWeight={"medium"} my="2">your about to delete a project</Heading>
-                        <Text textTransform={"capitalize"}  fontSize={"lg"}>this will delete your project</Text>
-                        <Text textTransform={"capitalize"}  fontSize={"lg"}>are you sure?</Text>
+                        <Heading textTransform={"capitalize"} fontFamily={"poppins"} size="md" fontWeight={"medium"} my="2">your about to delete a project</Heading>
+                        <Text textTransform={"capitalize"}  fontSize={"md"}>this will delete your project, are you sure?</Text>
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={handelDelete} isLoading={loading} loadingText='deleting' colorScheme='red' mx="3" fontWeight={"medium"} size="md">Delete</Button>
