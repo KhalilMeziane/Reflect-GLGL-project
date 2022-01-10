@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 
 export default function Project() {
     const { id } = useParams()
-    const { project, mutate } = useProject(id)
+    const { project, mutate, isLoading, error } = useProject(id)
     mutate()
     return (
         <>
@@ -21,7 +21,7 @@ export default function Project() {
             <AuthNavbar/>
             <Box px={{ base: 4, sm: 6, md: 8, xl: 28 }} py="3">
                 {
-                    project &&
+                    !isLoading && project &&
                     <>
                         <Flex justify={"space-between"} align={"center"}>
                             <Text py="3" fontSize="2xl" textTransform={"capitalize"} fontWeight={"semibold"}>{project?.data?.project?.name}</Text>
@@ -31,7 +31,7 @@ export default function Project() {
                     </>
                 }
                 {
-                    !project? <NotFound/>: <Content project={project}/>
+                    !project && error? <NotFound/>: <Content project={project}/>
                 }
             </Box>
         </>
