@@ -11,8 +11,7 @@ import { Link } from 'react-router-dom'
 
 export default function Project() {
     const { id } = useParams()
-    const { project, mutate, isLoading, error } = useProject(id)
-    mutate()
+    const { project, error, isLoading } = useProject(id)
     return (
         <>
             <Helmet>
@@ -21,7 +20,7 @@ export default function Project() {
             <AuthNavbar/>
             <Box px={{ base: 4, sm: 6, md: 8, xl: 28 }} py="3">
                 {
-                    !isLoading && project &&
+                    project && !isLoading &&
                     <>
                         <Flex justify={"space-between"} align={"center"}>
                             <Text py="3" fontSize="2xl" textTransform={"capitalize"} fontWeight={"semibold"}>{project?.data?.project?.name}</Text>
@@ -31,7 +30,7 @@ export default function Project() {
                     </>
                 }
                 {
-                    !project && error? <NotFound/>: <Content project={project}/>
+                    error? <NotFound/>: <Content project={project?.data?.project?.tasks}/>
                 }
             </Box>
         </>
@@ -60,7 +59,7 @@ const Content = ({project})=>{
             </TabList>
             <TabPanels>
                 <TabPanel>
-                    <Pert tasks={project?.data?.project?.tasks}/>
+                    {project && <Pert tasks={project}/>}
                 </TabPanel>
                 <TabPanel>
                     <p>this is gant chart!!</p>

@@ -5,7 +5,7 @@ import usePert from './usePert'
 
 export default function Pert({tasks}) {
     const taskList = {}
-    tasks?.forEach(({name, duration, previous}) => {
+    tasks && tasks?.forEach(({name, duration, previous}) => {
         taskList[name] = {
             id:name,
             predecessors: previous.map(item=>item.name).join().split(''),
