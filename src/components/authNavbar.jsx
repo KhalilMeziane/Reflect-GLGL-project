@@ -58,7 +58,7 @@ export default function Dsll() {
                         <Text fontSize="lg" textTransform="capitalize">profile</Text>
                       </Flex>
                     </Link>
-                    <Text cursor={"pointer"} display={"block"} mt="-4" variant={"none"} fontSize="lg" fontWeight={"medium"} textTransform="capitalize" onClick={()=>{ localStorage.clear(); navigate('/login')}}>
+                    <Text cursor={"pointer"} display={"block"} mt="-4" variant={"none"} fontSize="lg" fontWeight={"medium"} textTransform="capitalize" onClick={()=>{ localStorage.removeItem("REFLECT_TOKEN"); navigate('/login')}}>
                       <Flex gap="2" justifyItems={"center"} alignItems={"center"}>
                         <BiLogOut/>
                         <Text fontSize="lg" textTransform="capitalize">logout</Text>
