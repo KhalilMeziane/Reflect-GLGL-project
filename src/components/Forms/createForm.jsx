@@ -23,7 +23,7 @@ const initialValues = {
       {
         name: 'C',
         duration: '12',
-        previos: 'B',
+        previos: 'A',
       },
     ],
 }
