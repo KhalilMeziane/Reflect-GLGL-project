@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { useProject } from '../hooks/useProject'
 import notFound from '../assets/images/404-Not-Found.svg'
 import { Link } from 'react-router-dom'
+import Gant from '../components/charts/gant/gant'
 
 export default function Project() {
     const { id } = useParams()
@@ -62,7 +63,7 @@ const Content = ({project})=>{
                     {project && <Pert tasks={project}/>}
                 </TabPanel>
                 <TabPanel>
-                    <p>this is gant chart!!</p>
+                    <Gant/>
                 </TabPanel>
             </TabPanels>
         </Tabs>
