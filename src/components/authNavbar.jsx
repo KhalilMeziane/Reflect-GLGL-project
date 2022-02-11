@@ -11,6 +11,8 @@ import {
   PopoverContent,
   PopoverBody,
   PopoverArrow,
+  Skeleton,
+  Box
 } from "@chakra-ui/react"
 import { BiCaretDown , BiLogOut, BiUser, BiHomeAlt } from "react-icons/bi"
 import { Link } from 'react-router-dom'
@@ -18,7 +20,7 @@ import { useNavigate } from 'react-router-dom'
 import { useProfile } from './../hooks/useProfile'
 
 export default function Dsll() {
-  const { user } = useProfile()
+  const { user, isLoading } = useProfile()
   const navigate = useNavigate()
   return (
     <>

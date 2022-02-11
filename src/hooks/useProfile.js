@@ -16,7 +16,7 @@ export function useProfile(){
     return {
         mutate,
         error,
-        isLoading: !error && !data,
+        isLoadingProfile: !error && !data,
         user : data
     }
 }

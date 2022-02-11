@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik'
 import * as yup  from 'yup'
 import { Helmet } from "react-helmet"
 import { AuthNavbar } from '../components/_index'
-import { Box, Button, Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, SimpleGrid, Text, Skeleton } from '@chakra-ui/react'
 import InputFiled from '../components/Forms/Types/InputFiled'
 import { useProfile } from './../hooks/useProfile'
 import { UpdateProfileCall } from '../services/httpClient'
@@ -12,19 +12,17 @@ const updateSchemaValidation = yup.object({
 })
 
 export default function Profile() {
-    const { user, mutate } = useProfile()
+    const { user, mutate, isLoadingProfile } = useProfile()
     const [isLoading,setLoading] = useState(false)
     const handleFormSubmit = async(values, actions)=>{
         try{
             setLoading(true)
-            const response = await UpdateProfileCall(values)
+            await UpdateProfileCall(values)
             mutate()
-            console.log(response)
             setLoading(false)
         }
         catch(error){
             setLoading(false)
-            console.log(error.response)
         }
     }
     return (
@@ -59,13 +57,14 @@ export default function Profile() {
                         >
                             Your email
                         </Text>
-                        <Text 
-                            color="gray.900" 
-                            fontSize="xl" 
-                            fontWeight="semibold"
-                        >
-                            {user?.data?.user?.email}
-                        </Text>
+                       <>
+                            {
+                             isLoadingProfile && !user && <Skeleton height='37px' width="300px" />
+                            }
+                            {
+                                user && <Text color="gray.900" fontSize="xl">{ user?.data?.user?.email}</Text>
+                            }
+                       </>
                     </Box>
                     <hr/>
                     <SimpleGrid
@@ -73,7 +72,8 @@ export default function Profile() {
                         p={5}
                         spacing={4}
                     >
-                        <Formik
+                        {user &&
+                            <Formik
                             initialValues={{ name: user?.data?.user?.name}}
                             validationSchema={updateSchemaValidation}
                             onSubmit={(values, actions)=>{
@@ -104,6 +104,8 @@ export default function Profile() {
                                 )
                             }
                         </Formik>
+                        }
+                        
                     </SimpleGrid>
                 </Box>
             </Box>

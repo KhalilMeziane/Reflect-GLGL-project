@@ -9,6 +9,7 @@ import { useProject } from '../hooks/useProject'
 import notFound from '../assets/images/404-Not-Found.svg'
 import { Link } from 'react-router-dom'
 import Gant from '../components/charts/gant/gant'
+import { Skeleton } from '@chakra-ui/react'
 
 export default function Project() {
     const { id } = useParams()
@@ -20,6 +21,16 @@ export default function Project() {
             </Helmet>
             <AuthNavbar/>
             <Box px={{ base: 4, sm: 6, md: 8, xl: 28 }} py="3">
+                {
+                    isLoading && <>
+                        <Flex justify={"space-between"} align={"center"}>
+                            <Skeleton height='32px' width="160px" />
+                            <Skeleton height='32px' width="100px" />
+                        </Flex>
+                        <Divider bg="black" my="3"/>
+
+                    </>
+                }
                 {
                     project && !isLoading &&
                     <>

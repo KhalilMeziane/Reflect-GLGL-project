@@ -14,12 +14,13 @@ import { BsBoxArrowUpRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { DeleteProject } from '../components/modals/_index'
 import {useProjects} from '../hooks/useProjects'
+import { Skeleton , VStack } from '@chakra-ui/react'
+
 
 export default function ProjectsTable() {
     const header = ['project', 'actions']
-    const { projects } = useProjects()
+    const { projects, isLoading } = useProjects()
     const projectList = projects?.projects
-    // console.log('projects:', projectList)
     return (
       <Flex
         w="full"
@@ -28,6 +29,18 @@ export default function ProjectsTable() {
         alignItems="center"
         justifyContent="center"
       >
+        {
+           isLoading && 
+           <VStack w="full">
+             <Skeleton height='28px' width="full" />
+             <Skeleton height='28px' width="full" />
+             <Skeleton height='28px' width="full" />
+             <Skeleton height='28px' width="full" />
+             <Skeleton height='28px' width="full" />
+             <Skeleton height='28px' width="full" />
+             <Skeleton height='28px' width="full" />
+           </VStack>
+        }
         {
           projects && 
           <Table
