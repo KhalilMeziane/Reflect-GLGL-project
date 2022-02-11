@@ -19,6 +19,7 @@ export default function ProjectsTable() {
     const header = ['project', 'actions']
     const { projects } = useProjects()
     const projectList = projects?.projects
+    // console.log('projects:', projectList)
     return (
       <Flex
         w="full"

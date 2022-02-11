@@ -4,7 +4,7 @@ import _setAuthHeader from '../services/_setAuthHeader'
 import { GET_PROJECTS } from '../services/_endPointes'
 
 export function useProjects(){
-    const fetcher = async()=>{
+const fetcher = async()=>{
         const token = localStorage.getItem("REFLECT_TOKEN")
         _setAuthHeader(token)
         const response = await axios.get(GET_PROJECTS)
