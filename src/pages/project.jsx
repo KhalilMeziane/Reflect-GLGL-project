@@ -14,6 +14,7 @@ import { Skeleton } from '@chakra-ui/react'
 export default function Project() {
     const { id } = useParams()
     const { project, error, isLoading } = useProject(id)
+    console.log("project: ", project?.data?.project)
     return (
         <>
             <Helmet>
@@ -74,7 +75,7 @@ const Content = ({project})=>{
                     {project && <Pert tasks={project}/>}
                 </TabPanel>
                 <TabPanel>
-                    <Gant/>
+                    {project && <Gant tasks={project}/>}
                 </TabPanel>
             </TabPanels>
         </Tabs>
