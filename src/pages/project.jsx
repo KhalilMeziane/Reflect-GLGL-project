@@ -9,6 +9,8 @@ import { useProject } from '../hooks/useProject'
 import notFound from '../assets/images/404-Not-Found.svg'
 import { Link } from 'react-router-dom'
 import Gant from '../components/charts/gant/gant'
+import Gantt from '../components/charts/gant/gantt'
+
 import { Skeleton } from '@chakra-ui/react'
 
 export default function Project() {
