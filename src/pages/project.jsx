@@ -10,6 +10,7 @@ import notFound from '../assets/images/404-Not-Found.svg'
 import { Link } from 'react-router-dom'
 import { Skeleton } from '@chakra-ui/react'
 import GantChart from './../components/charts/gant/gantChart'
+import logo from '../assets/images/reflect.svg'
 
 export default function Project() {
     const { id } = useParams()
@@ -17,7 +18,7 @@ export default function Project() {
     return (
         <>
             <Helmet>
-                <title>Project | Reflect</title>
+                <title>{isLoading?"loading":project?.data?.project?.name.toUpperCase()} | Reflect</title>
             </Helmet>
             <AuthNavbar/>
             <Box px={{ base: 4, sm: 6, md: 8, xl: 28 }} py="3">

@@ -11,16 +11,16 @@ import {
   PopoverContent,
   PopoverBody,
   PopoverArrow,
-  Skeleton,
-  Box
 } from "@chakra-ui/react"
 import { BiCaretDown , BiLogOut, BiUser, BiHomeAlt } from "react-icons/bi"
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useProfile } from './../hooks/useProfile'
+import logo from '../assets/images/reflect.svg'
+
 
 export default function Dsll() {
-  const { user, isLoading } = useProfile()
+  const { user } = useProfile()
   const navigate = useNavigate()
   return (
     <>
@@ -33,7 +33,10 @@ export default function Dsll() {
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
           <HStack display="flex" spacing={3} alignItems="center">
               <Text fontSize="2xl" fontWeight="semibold">
-                <Link to="/dashboard">Reflect</Link>
+                <Flex>
+                  <img src={logo} alt="website logo brand" />
+                  <Link to="/dashboard">Reflect</Link>
+                </Flex>
               </Text>
           </HStack>
           <HStack

@@ -11,7 +11,9 @@ import {
     IconButton,
     CloseButton,
 } from "@chakra-ui/react"
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineMenu } from "react-icons/ai"
+import logo from '../assets/images/reflect.svg'
+
 
 export default function Navbar() {
   const bg = useColorModeValue("white", "gray.800")
@@ -30,7 +32,8 @@ export default function Navbar() {
             <Flex alignItems="center" justifyContent="space-between" mx="auto">
                 {/* logo brand */}
                 <Flex>
-                    <chakra.h1 fontSize="2xl" color="white" fontWeight="medium" ml="4" cursor="pointer">
+                    <img src={logo} alt="website logo brand" />
+                    <chakra.h1 fontSize="2xl" color="white" fontWeight="medium" cursor="pointer">
                         Reflect
                     </chakra.h1>
                 </Flex>
