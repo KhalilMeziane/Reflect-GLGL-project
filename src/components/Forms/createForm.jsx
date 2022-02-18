@@ -34,7 +34,8 @@ const createSchemaValidation = yup.object({
         .of(
             yup.object().shape({
                 name: yup.string().min(1, 'too short').required('Required'),
-                duration: yup.string().min(1, 'too short').required('Required'), 
+                duration: yup.number().typeError('must be a number').positive("must be a positive number")
+                .integer("must be a integer number").min(1, 'must be a greater or equal 1').required('Required'), 
             })
         )
 })
@@ -134,7 +135,7 @@ export default function CreateForm({onClose}) {
                                             colorScheme='blue'
                                             fontWeight={"normal"}
                                             onClick={() => push({ name: '', duration: '', previos:'' })}
-                                            disabled={values.tasks.length >= 15}
+                                            disabled={values.tasks.length >= 20}
                                         >add new tach</Button>
                                     </SimpleGrid>
                                 )

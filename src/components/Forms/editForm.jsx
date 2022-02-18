@@ -5,6 +5,7 @@ import { Button , HStack, Flex, Text, Box, SimpleGrid, ModalFooter } from '@chak
 import { BsFillTrashFill } from 'react-icons/bs'
 import InputFiled from './Types/InputFiled'
 import { editProjectCall } from '../../services/httpClient'
+import { useProject } from '../../hooks/useProject'
 
 const editSchemaValidation = yup.object({
     name: yup.string().min(6,'project name to short').required('project name is required'),
@@ -12,14 +13,15 @@ const editSchemaValidation = yup.object({
         .of(
             yup.object().shape({
                 name: yup.string().min(1, 'too short').required('Required'),
-                duration: yup.string().min(1, 'too short').required('Required')
+                duration: yup.number().typeError('must be a number').positive("must be a positive number")
+                .integer("must be a integer number").min(1, 'must be a greater or equal 1').required('Required'), 
             })
         )
 })
 
 export default function EditForm({onClose, project}) {
-    console.log("project start: ", project)
     const [isLoading, setLoading] = useState(false)
+    const { mutate } = useProject(project.id)
     const handleFormSubmit = async(values)=>{
         const projectUpdated = {}
         projectUpdated.name = values.name
@@ -35,6 +37,7 @@ export default function EditForm({onClose, project}) {
         try{
             setLoading(true)
             await editProjectCall(project.id, projectUpdated)
+            mutate()
             setLoading(false)
             onClose()
         }
@@ -115,9 +118,7 @@ export default function EditForm({onClose, project}) {
                                                                 placeholder="tach antecedents"
                                                                 type="text"
                                                                 mb="7"
-                                                                // value={values?.tasks[index].previous.map(item=>item.name).join()}
                                                             /> 
-                                                            {/* {console.log("val: ",typeof(values?.tasks[index].previous.map(item=>item.name).join()))} */}
                                                     </HStack>
                                                 </Box>
                                             ))
@@ -127,7 +128,7 @@ export default function EditForm({onClose, project}) {
                                             colorScheme='blue'
                                             fontWeight={"normal"}
                                             onClick={() => push({ name: '', duration: '', previos:'' })}
-                                            disabled={values.tasks.length >= 10}
+                                            disabled={values.tasks.length >= 20}
                                         >add new tach</Button>
                                     </SimpleGrid>
                                 )

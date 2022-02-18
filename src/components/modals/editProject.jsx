@@ -11,7 +11,7 @@ export default function EditProject({project}) {
             <Modal 
                 isOpen={isOpen} 
                 onClose={onClose}
-                size={"xl"}
+                size={"2xl"}
             >
                 <ModalOverlay/>
                 <ModalContent>
