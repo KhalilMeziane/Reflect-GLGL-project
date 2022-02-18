@@ -12,7 +12,6 @@ export default function EditProject({project}) {
                 isOpen={isOpen} 
                 onClose={onClose}
                 size={"2xl"}
-                isCentered
             >
                 <ModalOverlay/>
                 <ModalContent>
