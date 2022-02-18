@@ -23,6 +23,7 @@ export default function CreateProject() {
                 isOpen={isOpen} 
                 onClose={onClose}
                 size={"2xl"}
+                isCentered
             >
                 <ModalOverlay />
                 <ModalContent>

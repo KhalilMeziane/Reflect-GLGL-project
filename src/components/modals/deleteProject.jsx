@@ -45,6 +45,7 @@ import {useProjects} from '../../hooks/useProjects'
                 isOpen={isOpen} 
                 onClose={onClose}
                 size={"xl"}
+                isCentered
             >
                 <ModalOverlay />
                 <ModalContent>
