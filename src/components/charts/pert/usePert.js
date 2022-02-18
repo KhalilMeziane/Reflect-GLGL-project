@@ -8,6 +8,13 @@ export default function usePert(activities){
     let xStart = 10
     let yStart = 25
     const levels = []
+    const setLevels = ()=>{
+        let levels = {}
+
+
+        return levels
+    }
+    setLevels()
     const setPosition = ()=>{ 
         yStart = yStart + 50
         for(let tach in network){
@@ -16,7 +23,7 @@ export default function usePert(activities){
                 levels.push(
                     {
                         x: xStart,
-                        y: (height * 90 + 20)
+                        y: (height * 90 + 40)
                     }
                 )
             }else{

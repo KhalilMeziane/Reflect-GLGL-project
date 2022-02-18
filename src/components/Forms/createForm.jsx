@@ -134,7 +134,7 @@ export default function CreateForm({onClose}) {
                                             colorScheme='blue'
                                             fontWeight={"normal"}
                                             onClick={() => push({ name: '', duration: '', previos:'' })}
-                                            disabled={values.tasks.length >= 10}
+                                            disabled={values.tasks.length >= 15}
                                         >add new tach</Button>
                                     </SimpleGrid>
                                 )

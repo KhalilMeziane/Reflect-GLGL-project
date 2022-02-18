@@ -8,14 +8,12 @@ import { useParams } from 'react-router-dom'
 import { useProject } from '../hooks/useProject'
 import notFound from '../assets/images/404-Not-Found.svg'
 import { Link } from 'react-router-dom'
-import Gant from '../components/charts/gant/gant'
-
 import { Skeleton } from '@chakra-ui/react'
+import GantChart from './../components/charts/gant/gantChart'
 
 export default function Project() {
     const { id } = useParams()
     const { project, error, isLoading } = useProject(id)
-    console.log("project: ", project?.data?.project)
     return (
         <>
             <Helmet>
@@ -34,7 +32,7 @@ export default function Project() {
                     </>
                 }
                 {
-                    project && !isLoading &&
+                    project && !isLoading && !error &&
                     <>
                         <Flex justify={"space-between"} align={"center"}>
                             <Text py="3" fontSize="2xl" textTransform={"capitalize"} fontWeight={"semibold"}>{project?.data?.project?.name}</Text>
@@ -68,15 +66,15 @@ const Content = ({project})=>{
     return(
         <Tabs variant='enclosed'>
             <TabList>
-                <Tab>Pert Chart</Tab>
                 <Tab>Gant Chart</Tab>
+                <Tab>Pert Chart</Tab>
             </TabList>
             <TabPanels>
-                <TabPanel>
-                    {project && <Pert tasks={project}/>}
+                <TabPanel h="500px">
+                    {project && <GantChart tasks={project}/>}
                 </TabPanel>
                 <TabPanel>
-                    {project && <Gant tasks={project}/>}
+                    {project && <Pert tasks={project}/>}
                 </TabPanel>
             </TabPanels>
         </Tabs>
