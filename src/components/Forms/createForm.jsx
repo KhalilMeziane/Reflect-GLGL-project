@@ -51,7 +51,7 @@ export default function CreateForm({onClose}) {
             tasks.push({
                 name,
                 duration,
-                previous : !previos ? []: previos.split(/,| /)
+                previous : !previos ? []: previos.split(",")
             })
         })
         project.tasks = [...tasks]

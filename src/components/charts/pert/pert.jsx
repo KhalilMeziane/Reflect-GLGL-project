@@ -16,7 +16,7 @@ export default function Pert({tasks}) {
     })
     const Nodes = usePert(taskList)
     return (
-        <div style={{ height: 400 }}>
+        <div style={{ height:650 }}>
             <ReactFlow nodeTypes={{ special: Node }} elements={Nodes} />
         </div>
     )
