@@ -3,7 +3,6 @@ import Node from './node'
 
 export default function usePert(activities){
     const { activitiesParams, network, criticalPath, earliestStartTimes, earliestFinishTimes, latestFinishTimes, latestStartTimes } = jsPERT(activities)
-    // console.log('activities: ', jsPERT(activities))
 
     let xStart = 10
     let yStart = 25
@@ -33,48 +32,22 @@ export default function usePert(activities){
             indegree[i]=0;
         }
 
-
         for( let tache in network){
             if(tache === '__end' || tache === '__start' ){}else
             if(network[tache].predecessors[0] !== '__start'){
                 for(let t in network[tache].predecessors ){
                     let v = keys[t]
-                    //adj[1]=>[0]
-
-
                     indegree[keys.indexOf(tache)]++;
-                  //  console.log(`index ${keys.indexOf(tache)}`);
-                   // console.log(`indegree ${indegree[t]}`);
-                   // console.log(`indegree ${indegree}`);
 
-                    // E++;
                 }
             }
 
         }
 
-
-
-
-
-
-
-//         console.log(` vertices number ${verticesNumber}`);
-
-
-
-
-
-
         var q = [];
         let niv = 0;
 
-
-
-
         ins=[...indegree];
-      //  console.log(`indeg  ${indegree}`)
-       // console.log(`ins  ${ins}`)
 
         for (let i = 0; i < verticesNumber; i++) {
             if (ins[i] == 0){
@@ -87,11 +60,6 @@ export default function usePert(activities){
         let sizePerN = q.length;
         let i = 0;
         niv++;
-
-
-
-
-
 
         // Initialiser le compteur des noeuds visites
         let cnt = 0;
@@ -123,7 +91,6 @@ export default function usePert(activities){
                 // Si le indegree devient 0, ajouter le le noeud t dans la file
             }
             ls++;
-         //   console.log(`iteration ${ls}  ${q.length}`)
             i++;
             if(i == sizePerN){
                 i = 0;
@@ -141,43 +108,15 @@ export default function usePert(activities){
 
           //  return null;
         }
-       // console.log(topOrder);
-       // let newNiveau=[...niveau];
-       // niveau[0]=>[name:'A',]
+
 
 
         console.log(niveau)
-     //   console.log("Active params" );
 
-//        console.log(activitiesParams)
-
-
-        //***********************
         yStart = yStart + 50
 
         yStart = yStart + 50
-      /*  for(let tach in network){
-            if(network[tach].predecessors[0] === "__start"){
-                let height = network[tach].successors.length
-                levels.push(
-                    {
-                        x: xStart,
-                        y: (height * 90 + 40)
-                    }
-                )
-            }else{
-                xStart = xStart + 380
-                let height = network[tach].successors.length
-                levels.push(
-                    {
-                        x: xStart,
-                        y: yStart * height + 50
-                    }
-                )
-            }
-        }*/
-        //***********************
-        //let newLevels=new Map();
+
             let maxlevel=0;
         for(let  i in  niveau){
             if(niveau[i].length >maxlevel){
@@ -219,16 +158,6 @@ export default function usePert(activities){
             y += 250;
        }
 
-  //  console.log(`new levels`)
-/*    console.log(newLevels)
-    //levels=[...newLevels];
-
-       levels = new Map();
-       for(let s=0;s<newLevels.length;s++){
-           levels.set(s,newLevels[s])
-       }
-         */   console.log('new map ')
-    console.log(levels)
     }
 
 
@@ -243,28 +172,6 @@ export default function usePert(activities){
         return x;
 
     }
-
-
-       /* for(let tach in network){
-            if(network[tach].predecessors[0] === "__start"){
-                let height = network[tach].successors.length
-                levels.push(
-                    {
-                        x: xStart,
-                        y: (height * 90 + 40)
-                    }
-                )
-            }else{
-                xStart = xStart + 380
-                let height = network[tach].successors.length
-                levels.push(
-                    {
-                        x: xStart,
-                        y: yStart * height + 50
-                    }
-                )
-            }
-        }*/
 
     function  getTacheLevel(t){
         for(let i =0;i< niveau.length;i++){
@@ -281,14 +188,7 @@ export default function usePert(activities){
     }
     setPosition()
     const nodes = []
-   // let indexPosition = -1
     for(let tach in activitiesParams){
-     //   indexPosition += 1
-      //  let ind=getTacheLevel(tach);
-        console.log(`${tach} ${levels.get(`${tach}`)}  `)
-       // console.log(levels)
-       // console.log(`ind ${ind}`)
-       // console.log(levels.get(ind))
         nodes.push({
             id: tach,
             data:{

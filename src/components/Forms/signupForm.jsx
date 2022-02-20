@@ -22,7 +22,7 @@ export default function SignupForm() {
             const [tokenObject] = response.data
             localStorage.setItem("REFLECT_TOKEN",tokenObject.token)
             setLoading(false)
-            navigate('/profile')
+            navigate('/dashboard')
         }
         catch(error){
             setLoading(false)
